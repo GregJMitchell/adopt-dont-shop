@@ -1,11 +1,34 @@
 <%= stylesheet_link_tag  "application" %>
 <head>
   <title><%= @shelter[:name]%></title>
+  <style>
+    nav{
+    background-color: royalblue;
+  }
+  ul {
+        list-style-type: none;
+        padding: 15;
+        text-align: center;
+      }
+  li {
+        display: inline;
+        padding: 150;
+        color: grey;
+      }
+  </style>
 </head>
+
 <body>
   <header>
     <h1> <%=@shelter[:name]%> </h1>
   </header>
+  <nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/shelters">Shelters</a></li>
+    <li><a href="/pets">Pets</a></li>
+  </ul>
+</nav>
   <section>
     <h3>Address: <%=@shelter[:address]%></h3>
     <h3>City: <%=@shelter[:city]%></h3>
