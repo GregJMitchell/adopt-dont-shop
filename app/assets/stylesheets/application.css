@@ -23,6 +23,13 @@
   h3{
     color: white;
   }
+  p {
+    color: white;
+  }
+  form {
+    display: inline-block;
+  }
+  
 
   a:link {
     text-decoration: none;
