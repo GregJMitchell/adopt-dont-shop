@@ -29,8 +29,14 @@ h3 {
     <h1>All Shelters</h1>  
   </header>
   <nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/pets">Pets</a></li>
+  </ul>
+</nav>
+  <aside>
     <button class="button"><a href="/shelters/new">New Shelter</a></button>
-  </nav>
+  </aside>
   <section>
     <% @shelters.each do |shelter| %>
         <h3><a href="/shelters/<%= shelter[:id]%>"><%= shelter.name%></a></h3>

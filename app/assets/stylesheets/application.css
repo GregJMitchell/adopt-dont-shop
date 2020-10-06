@@ -46,3 +46,16 @@ a:visited {
   }
 a:hover {
 text-decoration: underline;
+}
+ul {
+  list-style-type: none;
+  padding: 15;
+  text-align: center;
+}
+li {
+  display: inline;
+  padding: 150;
+  color: grey;
+}
+nav{
+  background-color: royalblue;
