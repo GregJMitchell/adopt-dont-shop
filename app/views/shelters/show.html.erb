@@ -2,19 +2,19 @@
 <head>
   <title><%= @shelter[:name]%></title>
   <style>
-    nav{
-    background-color: royalblue;
-  }
-  ul {
-        list-style-type: none;
-        padding: 15;
-        text-align: center;
-      }
-  li {
-        display: inline;
-        padding: 150;
-        color: grey;
-      }
+    .button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+.button {background-color: royalblue;}
   </style>
 </head>
 
@@ -29,10 +29,13 @@
     <li><a href="/pets">Pets</a></li>
   </ul>
 </nav>
+<aside>
+    <button class="button"><a href="/shelters/<%= @shelter[:id]%>/edit">Edit Shelter</a></button>
+  </aside>
   <section>
     <h3>Address: <%=@shelter[:address]%></h3>
     <h3>City: <%=@shelter[:city]%></h3>
     <h3>State: <%=@shelter[:state]%></h3>
-    <h3>Zipcode:<%=@shelter[:zip]%></h3>
+    <h3>Zipcode: <%=@shelter[:zip]%></h3>
   </section>
 </body>
