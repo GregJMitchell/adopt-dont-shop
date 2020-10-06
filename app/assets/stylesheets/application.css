@@ -15,7 +15,7 @@
  */
 
   body{
-    background-color: black;
+    background-color: rgb(24, 24, 24);
   }
   h1 {
     color: White;
@@ -28,6 +28,11 @@
   }
   form {
     display: inline-block;
+  }
+  header {
+    border-color: royalblue;
+    border-width: 5px;
+    border-style: solid;
   }
   
 
