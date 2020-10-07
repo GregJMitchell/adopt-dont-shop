@@ -1,4 +1,6 @@
-# README
+# Adopt, Don't Shop
+
+## [Project link](https://g2mitchell-adopt-dont-shop.herokuapp.com/)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
