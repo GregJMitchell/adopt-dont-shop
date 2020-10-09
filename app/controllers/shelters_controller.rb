@@ -37,4 +37,8 @@ class SheltersController < ApplicationController
       shelter.save
       redirect_to "/shelters/#{shelter.id}"
   end
+
+  def destroy
+
+  end
 end
