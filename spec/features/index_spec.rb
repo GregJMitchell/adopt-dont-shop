@@ -25,6 +25,12 @@ describe 'As a visitor' do
     it "Then I see each Pet in the system including the Pet's: image, name, approximate age,
      sex, and name of the shelter where the pet is currently located" do
        visit '/pets'
+       expect(page).to have_xpath("//img[contains(@src,'#{pet_1.image}')]")
+       expect(page).to have_content(pet_1.name)
+       expect(page).to have_content(pet_1.age)
+       expect(page).to have_content(pet_1.sex)
+       expect(page).to have_content(pet_1.shelter)
+
      end
   end
 end
