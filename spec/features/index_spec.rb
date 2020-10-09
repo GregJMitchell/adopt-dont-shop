@@ -21,4 +21,10 @@ describe 'As a visitor' do
       expect(page).to have_link('New Shelter')
     end
   end
+  describe "When I visit '/pets'" do 
+    it "Then I see each Pet in the system including the Pet's: image, name, approximate age,
+     sex, and name of the shelter where the pet is currently located" do
+       visit '/pets'
+     end
+  end
 end
