@@ -31,6 +31,11 @@
 </nav>
 <aside>
     <button class="button"><a href="/shelters/<%= @shelter[:id]%>/edit">Edit Shelter</a></button>
+    <form action="/shelters/<%= @shelter[:id] %>" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="DELETE">
+      <input id="delete_button" class="button" type="submit" value="Delete Shelter"/>
+    </form>
   </aside>
   <section>
     <h3>Address: <%=@shelter[:address]%></h3>
