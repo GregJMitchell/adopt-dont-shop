@@ -37,7 +37,7 @@ describe 'As a visitor' do
                          name: 'Test_dog_2',
                          age: 10,
                          sex: 'felmale',
-                         shelter_id: shelter_1.id.to_s)
+                         shelter_id: 1)
       visit "/shelters/#{shelter_1.id}/pets"
       expect(page).to have_xpath("//img[contains(@src,'#{pet_1.image}')]")
       expect(page).to have_content(pet_1.name)
