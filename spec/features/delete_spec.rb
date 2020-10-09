@@ -15,7 +15,7 @@ describe 'As a visitor' do
       expect(find('#delete_button').value).to have_content('Delete Shelter')
       find('#delete_button').click
       expect(current_path).to eq("/shelters")
-      expect(page).to !have_content('Dumb Friends League')
+      expect(page).not_to have_content('Dumb Friends League')
     end
   end
 end
