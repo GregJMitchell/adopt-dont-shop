@@ -9,7 +9,7 @@ describe 'As a visitor' do
                                  state: 'Colorado',
                                  zip: '12345')
       visit "/shelters/#{shelter_1.id}"
-      expect(page).to have_link('Delete Shelter')
+      expect(find('#delete_button').value).to have_content('Delete Shelter')
     end
   end
 end
