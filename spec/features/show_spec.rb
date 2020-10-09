@@ -46,4 +46,27 @@ describe 'As a visitor' do
       expect(page).to have_content("Current Shelter Name: #{pet_1.shelter.name}")
     end
   end
+  describe "When I visit '/pets/:id'" do
+    it "Then I see the pet with that id including
+    the pet's:, image, name, description, approximate age, sex, adoptable/pending adoption status" do
+      shelter_1 = Shelter.create(name: 'Dumb Friends League',
+                                 address: '123 ABC Street',
+                                 city: 'Denver',
+                                 state: 'Colorado',
+                                 zip: '12345')
+      pet_1 = Pet.create(image: 'lib/assets/test_image',
+                         name: 'Test_dog',
+                         age: 5,
+                         sex: 'male',
+                         shelter_id: shelter_1.id.to_s)
+      visit "/pets/#{pet_1.id}"
+      expect(page).to have_xpath("//img[contains(@src,'#{pet_1.image}')]")
+      expect(page).to have_content(pet_1.name)
+      expect(page).to have_content("Age: #{pet_1.age}")
+      expect(page).to have_content("Sex: #{pet_1.sex}")
+      expect(page).to have_content("Current Shelter Name: #{pet_1.shelter.name}")
+      expect(page).to have_content("Description: #{pet_1.description}")
+      expect(page).to have_content("Adoptable/Pending Status: #{pet_1.status}")
+    end
+  end
 end
