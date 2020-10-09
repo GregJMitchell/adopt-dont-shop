@@ -29,7 +29,7 @@ describe 'As a visitor' do
                          name: 'Test_dog',
                          age: 5,
                          sex: 'male',
-                         shelter: 1)
+                         shelter_id: 1)
 
       expect(page).to have_xpath("//img[contains(@src,'#{pet_1.image}')]")
       expect(page).to have_content(pet_1.name)
