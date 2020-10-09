@@ -44,11 +44,6 @@ describe 'As a visitor' do
       expect(page).to have_content("Age: #{pet_1.age}")
       expect(page).to have_content("Sex: #{pet_1.sex}")
       expect(page).to have_content("Current Shelter Name: #{pet_1.shelter.name}")
-      expect(page).to have_xpath("//img[contains(@src,'#{pet_2.image}')]")
-      expect(page).to have_content(pet_2.name)
-      expect(page).to have_content("Age: #{pet_2.age}")
-      expect(page).to have_content("Sex: #{pet_2.sex}")
-      expect(page).to have_content("Current Shelter Name: #{pet_2.shelter.name}")
     end
   end
 end
