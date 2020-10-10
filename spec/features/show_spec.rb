@@ -43,7 +43,6 @@ describe 'As a visitor' do
       expect(page).to have_content(pet_1.name)
       expect(page).to have_content("Age: #{pet_1.age}")
       expect(page).to have_content("Sex: #{pet_1.sex}")
-      expect(page).to have_content("Current Shelter Name: #{pet_1.shelter.name}")
     end
   end
   describe "When I visit '/pets/:id'" do
