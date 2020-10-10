@@ -52,9 +52,6 @@ describe 'As a visitor' do
         find_field('pet[age]').value
         find_field('pet[sex]').value
         fill_in 'pet[name]', with: 'Test Pet'
-        find('#submit_button').click
-        expect(current_path).to eq("/shelters/#{shelter_1.id}")
-        expect(page).to have_content('Test Shelter')
       end
     end
   end
