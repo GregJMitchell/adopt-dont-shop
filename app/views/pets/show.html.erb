@@ -1,0 +1,47 @@
+<%= stylesheet_link_tag  "application" %>
+<head>
+  <title><%= @pet[:name]%></title>
+  <style>
+    .button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+.button {background-color: royalblue;}
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1> <%=@pet[:name]%> </h1>
+  </header>
+  <nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/shelters">Shelters</a></li>
+    <li><a href="/pets">Pets</a></li>
+  </ul>
+</nav>
+<aside>
+    <button class="button"><a href="/pets/<%= @pet[:id]%>/edit">Edit Pet</a></button>
+    <form action="/pets/<%= @pet[:id] %>" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="DELETE">
+      <input id="delete_button" class="button" type="submit" value="Delete Shelter"/>
+    </form>
+  </aside>
+  <section>
+    <img src="<%= @pet.image %>" alt="<%= @pet.name%>_image">
+    <h3>Description: <%=@pet[:description]%></h3>
+    <h3>Age: <%=@pet[:age]%></h3>
+    <h3>Sex: <%=@pet[:sex]%></h3>
+    <h3>Adoptable/Pending Status: <%=@pet[:status]%></h3>
+  </section>
+</body>
