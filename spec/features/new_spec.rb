@@ -53,6 +53,30 @@ describe 'As a visitor' do
         find_field('pet[sex]').value
         fill_in 'pet[name]', with: 'Test Pet'
       end
+      describe "And I click the button 'Create Pet'" do
+        it "Then a `POST` request is sent to '/shelters/:shelter_id/pets',
+          a new pet is created for that shelter,
+          hat pet has a status of 'adoptable',
+          and I am redirected to the Shelter Pets Index page where I can see the new pet listed" do
+          shelter_1 = Shelter.create(name: 'Dumb Friends League',
+                                     address: '123 ABC Street',
+                                     city: 'Denver',
+                                     state: 'Colorado',
+                                     zip: '12345')
+          pet_1 = Pet.create(image: 'lib/assets/test_image',
+                             name: 'Test_dog',
+                             age: 5,
+                             sex: 'male',
+                             shelter_id: shelter_1.id.to_s,
+                             description: 'test description',
+                             status: 'Adoptable')
+          visit "/shelters/#{shelter_1.id}/pets/new"
+          fill_in 'pet[name]', with: 'Test Pet'
+          find('#submit_button').click
+          expect(current_path).to eq("/shelters/#{shelter_1.id}/pets")
+          expect(page).to have_content(pet_1.name)
+        end
+      end
     end
   end
 end
