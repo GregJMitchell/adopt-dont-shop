@@ -49,4 +49,8 @@ class SheltersController < ApplicationController
       pet.id == params[:id]
     end
   end
+
+  def new_pet
+    
+  end
 end
