@@ -42,7 +42,7 @@ h4 {
   </aside>
   <section>
     <% @pets.each do |pet| %>
-        <h3>Pet Name: <%= pet.name%></h3>
+        <h3>Pet Name: <a href="/pets/<%= pet.id %>"><%= pet.name%></a></h3>
         <h4>Age: <%= pet.age %></h4>
         <h4>Sex: <%= pet.sex %></h4>
         <h4>Current Shelter Name: <%= pet.shelter.name %></h4>
