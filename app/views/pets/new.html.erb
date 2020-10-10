@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag  "application" %>
 <head>
-<title>Create New Shelter</title>
+<title>Create New Pet</title>
 
   <style>
     body{
@@ -23,18 +23,18 @@
 </head>
 
 <body>  
-  <form action="/shelters" method="post">
+  <form action="/pets" method="post">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
     <p>Shelter Name</p>
-    <input type='text' name='shelter[name]'/><br/>
+    <input type='text' name='pet[image]'/><br/>
     <p>Shelter Address</p>
-    <input type='text' name='shelter[address]'/><br/>
+    <input type='text' name='pet[name]'/><br/>
     <p>City</p>
-    <input type='text' name='shelter[city]'/><br/>
+    <input type='text' name='pet[description]'/><br/>
     <p>State</p>
-    <input type='text' name='shelter[state]'/><br/>
+    <input type='text' name='pet[sex]'/><br/>
     <p>Zip</p>
-    <input type='text' name='shelter[zip]'/><br/>
+    <input type='text' name='pet[age]'/><br/>
     <input class="button" id="submit_button" type='submit'/>
   </form>
 </body>
