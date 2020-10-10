@@ -29,7 +29,7 @@ h4 {
 
 <body>
   <header>
-    <h1>All Pets</h1>  
+    <h1>All Pets at <%= @shelter.name %></h1>  
   </header>
   <nav>
   <ul>
@@ -38,7 +38,7 @@ h4 {
   </ul>
 </nav>
   <aside>
-    <button class="button"><a href="/pets/new">New Pet</a></button>
+    <button class="button"><a href="/shelters/<%= @shelter.id %>/pets/new">New Pet</a></button>
   </aside>
   <section>
     <% @pets.each do |pet| %>

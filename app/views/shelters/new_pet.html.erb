@@ -25,15 +25,15 @@
 <body>  
   <form action="/pets" method="post">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <p>Shelter Name</p>
+    <p>Pet Name</p>
     <input type='text' name='pet[image]'/><br/>
-    <p>Shelter Address</p>
+    <p>Pet Image</p>
     <input type='text' name='pet[name]'/><br/>
-    <p>City</p>
+    <p>Age</p>
     <input type='text' name='pet[description]'/><br/>
-    <p>State</p>
+    <p>Sex</p>
     <input type='text' name='pet[sex]'/><br/>
-    <p>Zip</p>
+    <p>Description</p>
     <input type='text' name='pet[age]'/><br/>
     <input class="button" id="submit_button" type='submit'/>
   </form>
