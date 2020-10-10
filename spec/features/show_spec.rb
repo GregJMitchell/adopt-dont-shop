@@ -58,13 +58,14 @@ describe 'As a visitor' do
                          name: 'Test_dog',
                          age: 5,
                          sex: 'male',
-                         shelter_id: shelter_1.id.to_s)
+                         shelter_id: shelter_1.id.to_s,
+                         description: 'test description',
+                         status: 'Adoptable')
       visit "/pets/#{pet_1.id}"
       expect(page).to have_xpath("//img[contains(@src,'#{pet_1.image}')]")
       expect(page).to have_content(pet_1.name)
       expect(page).to have_content("Age: #{pet_1.age}")
       expect(page).to have_content("Sex: #{pet_1.sex}")
-      expect(page).to have_content("Current Shelter Name: #{pet_1.shelter.name}")
       expect(page).to have_content("Description: #{pet_1.description}")
       expect(page).to have_content("Adoptable/Pending Status: #{pet_1.status}")
     end
