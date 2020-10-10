@@ -1,8 +1,11 @@
 class ShelterPetsController < ApplicationController
   def pets
-    @pets = Pet.all
-    @pets.find_each do |pet|
-      pet.id == params[:id]
+    @pets = []
+    pets = Pet.all
+    pets.find_each do |pet|
+      if pet.shelter_id == params[:id].to_i
+        @pets << pet
+      end
     end
     @shelter = Shelter.find(params[:id])
   end
@@ -17,7 +20,7 @@ class ShelterPetsController < ApplicationController
       name: params[:pet][:name],
       age: params[:pet][:age],
       sex: params[:pet][:sex],
-      shelter: params[:pet][:shelter_id],
+      shelter_id: params[:id],
       status: "Adoptable"
     })
     pet.save
