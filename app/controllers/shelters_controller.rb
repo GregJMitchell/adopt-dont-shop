@@ -52,6 +52,6 @@ class SheltersController < ApplicationController
   end
 
   def new_pet
-    
+    @shelter = show
   end
 end
