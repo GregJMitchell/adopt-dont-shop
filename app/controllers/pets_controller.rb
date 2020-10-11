@@ -28,4 +28,9 @@ class PetsController < ApplicationController
     pet.save
     redirect_to "/pets/#{params[:id]}"
   end
+
+  def destroy
+    Pet.destroy(params[:id])
+    redirect_to '/pets'
+  end
 end
