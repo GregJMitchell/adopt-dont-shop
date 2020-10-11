@@ -24,7 +24,7 @@ h4 {
 <body>
 <div class="shelter_title_bar">
     <button class="button"><a href="/shelters/<%= @shelter.id %>/pets/new">New Pet</a></button>
-    <h2><%= @shelter.name %>'s Pets</h2>
+    <h2>All Pets at the <a href="/shelters/<%= @shelter.id %>"><%= @shelter.name %></a></h2>
 </div>
   <aside>
   </aside>
@@ -36,6 +36,12 @@ h4 {
         <h4>Sex: <%= pet.sex %></h4>
         <h4>Adoption Status: <%= pet.status %></h4>
         <img src="<%= pet.image %>" alt="<%= pet.name%>_image">
+    <button class="button"><a href="/pets/<%= pet[:id]%>/edit">Edit Pet</a></button>
+    <form action="/pets/<%= pet[:id] %>" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="DELETE">
+      <input id="delete_button" class="button" type="submit" value="Delete Pet"/>
+    </form>
     </div>
       <%end%>
   </section>
