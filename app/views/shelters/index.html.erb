@@ -1,20 +1,8 @@
-<%= stylesheet_link_tag  "application" %>
+
 <head>
   <title>Shelters</title>
 <style>
-  .button {
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-
-.button {background-color: royalblue;}
+  
 h1 {
   text-align: center;
 }
@@ -25,21 +13,15 @@ h3 {
 </head>
 
 <body>
-  <header>
+  <article>
     <h1>All Shelters</h1>  
-  </header>
-  <nav>
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/pets">Pets</a></li>
-  </ul>
-</nav>
+  </article>
   <aside>
     <button class="button"><a href="/shelters/new">New Shelter</a></button>
   </aside>
   <section>
     <% @shelters.each do |shelter| %>
-        <h3><a href="/shelters/<%= shelter[:id]%>"><%= shelter.name%></a></h3>
+        <h3 class="div1"><a href="/shelters/<%= shelter[:id]%>"><%= shelter.name%></a></h3>
       <%end%>
   </section>
 </body>

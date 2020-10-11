@@ -33,7 +33,7 @@ describe 'As a visitor' do
                          description: 'test description',
                          status: 'Adoptable')
       visit "/pets/#{pet_1.id}"
-      !find('#delete_button').click
+      find('#delete_button').click
       expect(current_path).to eq("/pets")
       expect(page).not_to have_content(pet_1.name)
     end

@@ -1,33 +1,14 @@
-<%= stylesheet_link_tag  "application" %>
+
 <head>
   <title>Pets</title>
 <style>
-  .button {
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 25%;
-}
-.div1 {
-  width: 100%%;
-  height: auto;
-  border: 3px solid royalblue;
-  padding: 5px;
-}
-
-.button {background-color: royalblue;}
+ 
 h1 {
   text-align: center;
+}
+h2 {
+  text-align: center;
+  display: block;
 }
 h3 {
   text-align: center;
@@ -35,30 +16,32 @@ h3 {
 h4 {
   text-align: center;
 }
+
+
 </style>
 </head>
 
 <body>
-  <header>
-    <h1>All Pets at <%= @shelter.name %></h1>  
-  </header>
-  <nav>
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/shelters">Shelters</a></li>
-  </ul>
-</nav>
-  <aside>
+<div class="shelter_title_bar">
     <button class="button"><a href="/shelters/<%= @shelter.id %>/pets/new">New Pet</a></button>
+    <h2>All Pets at the <a href="/shelters/<%= @shelter.id %>"><%= @shelter.name %></a></h2>
+</div>
+  <aside>
   </aside>
   <section>
     <% @pets.each do |pet| %>
     <div class="div1">
-        <h3>Pet Name: <%= pet.name%></h3>
+        <h3>Pet Name: <a href="/pets/<%= pet.id %>"><%= pet.name%></a></h3>
         <h4>Age: <%= pet.age %></h4>
         <h4>Sex: <%= pet.sex %></h4>
         <h4>Adoption Status: <%= pet.status %></h4>
         <img src="<%= pet.image %>" alt="<%= pet.name%>_image">
+    <button class="button"><a href="/pets/<%= pet[:id]%>/edit">Edit Pet</a></button>
+    <form action="/pets/<%= pet[:id] %>" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="DELETE">
+      <input id="delete_button" class="button" type="submit" value="Delete Pet"/>
+    </form>
     </div>
       <%end%>
   </section>
