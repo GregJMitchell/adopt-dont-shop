@@ -2,9 +2,8 @@
 
 ## [Project link](https://g2mitchell-adopt-dont-shop.herokuapp.com/)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
+Rails -v 5.2.4.3
+Ruby -v 2.5.3
 Things you may want to cover:
 
 * Ruby version
