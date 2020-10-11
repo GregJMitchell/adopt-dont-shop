@@ -20,7 +20,7 @@
     <button class="button"><a href="/shelters/<%= @shelter[:id]%>/pets">View This Shelters Pets</a></button>
   </aside>
   <section>
-  <h2><a href="shelters/<%= @shelter[:id]%>"> <%= @shelter.name %></a></h2>
+  <h2><a href="<%= @shelter[:id]%>"> <%= @shelter.name %></a></h2>
     <h3>Address: <%=@shelter[:address]%></h3>
     <h3>City: <%=@shelter[:city]%></h3>
     <h3>State: <%=@shelter[:state]%></h3>
