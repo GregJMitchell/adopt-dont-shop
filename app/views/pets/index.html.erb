@@ -1,20 +1,9 @@
+
+  
 <%= stylesheet_link_tag  "application" %>
 <head>
   <title>Pets</title>
 <style>
-  .button {
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-
-.button {background-color: royalblue;}
 h1 {
   text-align: center;
 }
@@ -28,24 +17,16 @@ h4 {
 </head>
 
 <body>
-  <header>
-    <h1>All Pets</h1>  
-  </header>
-  <nav>
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/shelters">Shelters</a></li>
-  </ul>
-</nav>
-  <aside>
-    <button class="button"><a href="/pets/new">New Pet</a></button>
-  </aside>
+  <Article>
+    <h2>All Pets</h2>  
+  </Article>
+  
   <section>
     <% @pets.each do |pet| %>
         <h3>Pet Name: <a href="/pets/<%= pet.id %>"><%= pet.name%></a></h3>
         <h4>Age: <%= pet.age %></h4>
         <h4>Sex: <%= pet.sex %></h4>
-        <h4>Current Shelter Name: <%= pet.shelter.name %></h4>
+        <h4>Current Shelter Name: <a href="/shelters/<%= pet.shelter_id %>"><%= pet.shelter.name %></a></h4>
         <img src="<%= pet.image %>" alt="<%= pet.name%>_image">
         <form action="/pets/<%= pet.id %>" method="POST">
           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">

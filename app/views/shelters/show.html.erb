@@ -2,33 +2,14 @@
 <head>
   <title><%= @shelter[:name]%></title>
   <style>
-    .button {
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-
-.button {background-color: royalblue;}
+  h2 {
+    text-decoration: underline;
+  }
   </style>
 </head>
 
 <body>
-  <header>
-    <h1> <%=@shelter[:name]%> </h1>
-  </header>
-  <nav>
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/shelters">Shelters</a></li>
-    <li><a href="/shelters/<%= @shelter.id %>/pets">Pets</a></li>
-  </ul>
-</nav>
+  
 <aside>
     <button class="button"><a href="/shelters/<%= @shelter[:id]%>/edit">Edit Shelter</a></button>
     <form action="/shelters/<%= @shelter[:id] %>" method="POST">
@@ -36,8 +17,10 @@
       <input type="hidden" name="_method" value="DELETE">
       <input id="delete_button" class="button" type="submit" value="Delete Shelter"/>
     </form>
+    <button class="button"><a href="/shelters/<%= @shelter[:id]%>/pets">View This Shelters Pets</a></button>
   </aside>
   <section>
+  <h2><%= @shelter.name %></h2>
     <h3>Address: <%=@shelter[:address]%></h3>
     <h3>City: <%=@shelter[:city]%></h3>
     <h3>State: <%=@shelter[:state]%></h3>
