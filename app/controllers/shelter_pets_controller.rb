@@ -15,11 +15,13 @@ class ShelterPetsController < ApplicationController
   end
 
   def create_pet
+    
     pet = Pet.new({
       image: params[:pet][:image],
       name: params[:pet][:name],
       age: params[:pet][:age],
       sex: params[:pet][:sex],
+      description: params[:pet][:description],
       shelter_id: params[:id],
       status: "Adoptable"
     })
