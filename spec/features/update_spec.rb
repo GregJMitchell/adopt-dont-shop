@@ -44,6 +44,11 @@ describe 'As a visitor, When I visit a Pet Show page' do
         expect(find_field('pet[age]').value).to have_content(pet_1.age)
         expect(find_field('pet[sex]').value).to have_content(pet_1.sex)
         expect(find_field('pet[description]').value).to have_content(pet_1.description)
+
+        fill_in 'pet[name]', with: 'Test Pet'
+        find('#submit_button').click
+        expect(current_path).to eq("/pets/#{pet_1.id}")
+        expect(page).to have_content(pet_1.name)
       end
     end
   end
