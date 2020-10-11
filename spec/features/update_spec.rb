@@ -48,7 +48,7 @@ describe 'As a visitor, When I visit a Pet Show page' do
         fill_in 'pet[name]', with: 'Test Pet'
         find('#submit_button').click
         expect(current_path).to eq("/pets/#{pet_1.id}")
-        expect(page).to have_content(pet_1.name)
+        expect(page).to have_content("Test Pet")
       end
     end
   end
