@@ -1,0 +1,41 @@
+<%= stylesheet_link_tag  "application" %>
+<head>
+<title>Edit Pet</title>
+
+  <style>
+    body{
+      text-align: center;
+    }
+    .button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+.button {background-color: royalblue;}
+  </style>
+</head>
+
+<body>  
+  <form action="/pets/<%= @pet[:id]%>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="_method" value="PATCH" />
+    <p>Pet Name</p>
+    <input type='text' name='pet[name]' value="<%=@pet[:name] %>"/><br/>
+    <p>Pet Image</p>
+    <input type='text' name='pet[image]' value="<%=@pet[:image] %>"/><br/>
+    <p>Sex</p>
+    <input type='text' name='pet[sex]' value="<%=@pet[:sex] %>"/><br/>
+    <p>Age</p>
+    <input type='text' name='pet[age]' value="<%=@pet[:age] %>"/><br/>
+    <p>Description</p>
+    <input type='text' name='pet[description]' value="<%=@pet[:description] %>"/><br/>
+    <input class="button" id="submit_button" type='submit'/>
+  </form>
+</body>
