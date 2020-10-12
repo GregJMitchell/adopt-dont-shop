@@ -1,0 +1,39 @@
+<head>
+<title>Create New User</title>
+
+  <style>
+    body{
+      text-align: center;
+    }
+    .button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+.button {background-color: royalblue;}
+  </style>
+</head>
+
+<body>  
+  <form action="/users" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <p>Username</p>
+    <input type='text' name='user[name]'/><br/>
+    <p>Street Address</p>
+    <input type='text' name='user[address]'/><br/>
+    <p>City</p>
+    <input type='text' name='user[city]'/><br/>
+    <p>State</p>
+    <input type='text' name='user[state]'/><br/>
+    <p>Zip</p>
+    <input type='text' name='user[zip]'/><br/>
+    <input class="button" id="submit_button" type='submit'/>
+  </form>
+</body>
