@@ -10,6 +10,11 @@ describe 'As a visitor' do
                            zip: '12345')
 
       visit "/users/#{user_1.id}"
+      expect(page).to have_content(user_1.name)
+      expect(page).to have_content(user_1.address)
+      expect(page).to have_content(user_1.city)
+      expect(page).to have_content(user_1.state)
+      expect(page).to have_content(user_1.zip)
     end
   end
 end
