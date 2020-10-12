@@ -15,7 +15,7 @@ class SheltersController < ApplicationController
       state: params[:shelter][:state],
       zip: params[:shelter][:zip]
     })
-    shelter.save
+    shelter.save!
     redirect_to '/shelters'
   end
 
@@ -39,6 +39,7 @@ class SheltersController < ApplicationController
   end
 
   def destroy
+    Shelter.find
     Shelter.destroy(params[:id])
     redirect_to '/shelters'
   end
