@@ -24,7 +24,7 @@
   }
   h2 {
     color: white;
-    
+
   }
   h3{
     color: white;
@@ -47,7 +47,7 @@
     border-width: 5px;
     border-style: solid;
   }
-  
+
 
   a:link {
     text-decoration: none;
@@ -90,11 +90,7 @@ section {
   cursor: pointer;
   display: inline;
   background-color: royalblue;
-  
-}
-form:hover{
-  text-decoration: underline;
-  color: white;
+
 }
 
 img {

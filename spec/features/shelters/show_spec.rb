@@ -18,6 +18,24 @@ describe 'As a visitor' do
       expect(page).to have_content("Zipcode: #{shelter_1.zip}")
       expect(page).to have_link('Edit Shelter')
     end
+
+    it "should have a link to add a new review for this shelter" do
+      shelter_1 = Shelter.create(name: 'Dumb Friends League',
+                                 address: '123 ABC Street',
+                                 city: 'Denver',
+                                 state: 'Colorado',
+                                 zip: '12345')
+
+      visit "/shelters/#{shelter_1.id}"
+      expect(page).to have_link('Add Review')
+      find('#add_review').click
+      expect(current_path).to eq("/shelters/#{shelter_1.id}/new_review")
+      !expect(find_field('review[title]').value)
+      find('.ratings')
+      !expect(find_field('review[content]').value)
+      !expect(find_field('review[username]').value)
+      !expect(find_field('review[image]').value)
+    end
   end
   describe "When I visit '/shelters/:shelter_id/pets'" do
     it "Then I see each Pet that can be adopted from that
