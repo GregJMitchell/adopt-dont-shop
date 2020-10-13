@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  
+
 <aside>
     <button class="button"><a href="/shelters/<%= @shelter[:id]%>/edit">Edit Shelter</a></button>
     <form action="/shelters/<%= @shelter[:id] %>" method="POST">
@@ -32,6 +32,7 @@
   </section>
   <div>
     <h4>Reviews</h4>
+    <a id="add_review" href="/shelters/<%= @shelter.id %>/new_review">Add Review</a>
     <% @shelter.reviews.each do |review| %>
     <div class="div1">
       <h5><%= review.title %></h5>
