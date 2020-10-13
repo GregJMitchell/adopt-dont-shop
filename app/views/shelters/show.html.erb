@@ -5,6 +5,10 @@
   h2 {
     text-decoration: underline;
   }
+  h5 {
+    font-size: larger;
+    text-decoration: underline;
+  }
   </style>
 </head>
 
@@ -29,11 +33,13 @@
   <div>
     <h4>Reviews</h4>
     <% @shelter.reviews.each do |review| %>
+    <div class="div1">
       <h5><%= review.title %></h5>
       <p><%= review.rating %></p>
       <p><%= review.content %></p>
       <p><%= review.username %></p>
       <img src="<%= review.image %>" alt="<%= review.username%>'s image'">
+    </div>
     <% end %>
   </div>
 </body>
