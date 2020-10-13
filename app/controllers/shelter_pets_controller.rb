@@ -1,12 +1,6 @@
 class ShelterPetsController < ApplicationController
   def pets
-    @pets = []
-    pets = Pet.all
-    pets.find_each do |pet|
-      if pet.shelter_id == params[:id].to_i
-        @pets << pet
-      end
-    end
+    @pets = (Shelter.find(params[:id])).pets
     @shelter = Shelter.find(params[:id])
   end
   
