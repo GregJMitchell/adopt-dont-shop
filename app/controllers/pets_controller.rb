@@ -4,7 +4,7 @@ class PetsController < ApplicationController
   end
 
   def new
-    
+
   end
 
   def show
@@ -22,6 +22,7 @@ class PetsController < ApplicationController
       name: params[:pet][:name],
       age: params[:pet][:age],
       sex: params[:pet][:sex],
+      description: params[:pet][:description],
       shelter_id: pet.shelter_id,
       status: "Adoptable"
     })

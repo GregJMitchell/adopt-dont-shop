@@ -13,7 +13,7 @@
     <form action="/pets/<%= @pet[:id] %>" method="POST">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
       <input type="hidden" name="_method" value="DELETE">
-      <input id="delete_button" class="button" type="submit" value="Delete Pet"/>
+      <input id="delete_pet" class="button" type="submit" value="Delete Pet"/>
     </form>
     <div class="pet_desc">
     <h3>Description: <%=@pet[:description]%></h3>

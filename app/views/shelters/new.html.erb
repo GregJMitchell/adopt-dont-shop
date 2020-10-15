@@ -1,40 +1,61 @@
-
 <head>
-<title>Create New Shelter</title>
+  <title>Create New Shelter</title>
 
   <style>
+
     body{
       text-align: center;
     }
-    .button {
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
 
+    .shelter-button {
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
 
-.button {background-color: royalblue;}
-  </style>
+    .shelter-creation {
+      text-align: center;
+      padding: 15px;
+      display: block;
+      color: white;
+    }
+    </style>
 </head>
 
-<body>  
-  <form action="/shelters" method="post">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <p>Shelter Name</p>
-    <input type='text' name='shelter[name]'/><br/>
-    <p>Shelter Address</p>
-    <input type='text' name='shelter[address]'/><br/>
-    <p>City</p>
-    <input type='text' name='shelter[city]'/><br/>
-    <p>State</p>
-    <input type='text' name='shelter[state]'/><br/>
-    <p>Zip</p>
-    <input type='text' name='shelter[zip]'/><br/>
-    <input class="button" id="submit_button" type='submit'/>
-  </form>
+<body>
+    <%= form_tag("/shelters", method: "post") do %>
+      <div class="shelter-creation">
+        <%= label_tag("shelter[name]", "Shelter Name") %><br>
+        <%= text_field_tag("shelter[name]") %>
+      </div>
+
+      <div class="shelter-creation">
+        <%= label_tag("shelter[address]", "Shelter Address") %><br>
+        <%= text_field_tag("shelter[address]") %>
+      </div>
+
+      <div class="shelter-creation">
+        <%= label_tag("shelter[city]", "City") %><br>
+        <%= text_field_tag("shelter[city]") %>
+      </div>
+
+      <div class="shelter-creation">
+        <%= label_tag("shelter[state]", "State") %><br>
+        <%= text_field_tag("shelter[state]") %>
+      </div>
+
+      <div class="shelter-creation">
+        <%= label_tag("shelter[zip]", "Zip") %><br>
+        <%= text_field_tag("shelter[zip]") %>
+      </div>
+
+      <div class="shelter-button">
+        <%= submit_tag("Create User") %>
+      </div>
+    <% end %>
 </body>
