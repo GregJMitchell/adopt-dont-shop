@@ -48,11 +48,7 @@ class SheltersController < ApplicationController
   end
 
   def create_review
-    users = User.all
-    user_id = nil
-    users.each do |user|
-      user_id = user.id if user.name.upcase == (params[:review][:username]).upcase
-    end
+    user = User.find_by(name: params[:review][:username])
 
     review = Review.new(
       title: params[:review][:title],
@@ -66,5 +62,9 @@ class SheltersController < ApplicationController
 
     review.save
     redirect_to "/shelters/#{params[:id]}"
+  end
+
+  def edit_review
+    require 'pry'; binding.pry
   end
 end
