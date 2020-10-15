@@ -28,5 +28,5 @@ describe 'As a visitor' do
               expect(current_path).to eq("/reviews/#{review.id}/edit")
           end
         end
-      end
+    end
 end
