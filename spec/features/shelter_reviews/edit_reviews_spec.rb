@@ -26,7 +26,10 @@ describe 'As a visitor' do
               expect(page).to have_link("Edit Review")
               click_link("Edit Review")
               expect(current_path).to eq("/reviews/#{review.id}/edit")
-
+              expect(page).to have_content('Pets')
+            expect(find_field("review[content]").value).to have_content('Content of the review')
+            expect(find_field("review[username]").value).to have_content('Mike')
+            expect(find_field("review[title]").value).to have_content('test title')
           end
         end
     end
