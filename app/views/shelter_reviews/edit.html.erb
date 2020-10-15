@@ -17,6 +17,7 @@
   <div class="review_form">
 
     <%= form_tag("/reviews", method: "post") do %>
+    <input type="hidden" name="review[shelter_id]" value='<%= @shelter.id %>'>
       <div class="review_labels">
         <%= label_tag("review[title]", "Title") %><br>
         <%= text_field_tag("review[title]", value="#{@review.title}")%>
@@ -56,7 +57,7 @@
       </div>
 
       <div id="submit_button">
-        <%= submit_tag("Create Review") %>
+        <%= submit_tag("Update Review") %>
       </div>
     <% end %>
   </div>

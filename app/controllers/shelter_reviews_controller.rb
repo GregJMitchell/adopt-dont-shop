@@ -6,7 +6,7 @@ class ShelterReviewsController < ApplicationController
 
     def create
         user = User.find_by(name: params[:review][:username])
-
+        
         review = Review.new(
             title: params[:review][:title],
             rating: params[:review][:rating],
@@ -23,5 +23,6 @@ class ShelterReviewsController < ApplicationController
 
     def edit
         @review = Review.find(params[:id])
+        @shelter = @review.shelter
     end
 end
