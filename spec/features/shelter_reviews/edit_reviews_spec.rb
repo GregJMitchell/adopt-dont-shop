@@ -26,6 +26,7 @@ describe 'As a visitor' do
               expect(page).to have_link("Edit Review")
               click_link("Edit Review")
               expect(current_path).to eq("/reviews/#{review.id}/edit")
+
           end
         end
     end

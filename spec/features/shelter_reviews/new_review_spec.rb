@@ -36,14 +36,14 @@ describe 'As a visitor' do
             fill_in 'review[title]', with: 'Pets'
             find("#review_rating_1").click
             fill_in 'review[content]', with: 'Pets Look cute'
-            select(user_1.name, from: 'review[username]')
+            fill_in 'review[username]', with: 'Jose'
             fill_in 'review[image]', with: 'lib/assets/test_image'
             click_button 'Create Review'
             expect(current_path).to eq("/shelters/#{shelter_1.id}")
             expect(page).to have_content('Pets')
             expect(page).to have_content('5')
             expect(page).to have_content('Pets Look cute')
-            # expect(page).to have_content('Jose')
+            expect(page).to have_content('Jose')
             expect(page).to have_xpath("//img[contains(@src,'lib/assets/test_image')]")
           end
     end
