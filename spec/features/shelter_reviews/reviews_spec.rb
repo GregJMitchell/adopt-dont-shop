@@ -52,7 +52,7 @@ describe 'As a visitor' do
             visit "/shelters/#{shelter_1.id}"
           expect(page).to have_link("Edit Review")
           click_link("Edit Review")
-          expect(current_path).to eq("/shelters/#{shelter_1.id}/edit_review")
+          expect(current_path).to eq("/reviews/#{review.id}/edit")
       end
     end
   end

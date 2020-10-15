@@ -32,10 +32,10 @@
   </section>
   <div>
     <h4>Reviews</h4>
-    <a id="add_review" href="/shelters/<%= @shelter.id %>/new_review">Add Review</a>
+    <a id="add_review" href="/shelters/<%= @shelter.id %>/reviews/new">Add Review</a>
     <% @shelter.reviews.each do |review| %>
     <div class="div1">
-    <a id="edit_review" href="/shelters/<%= @shelter.id %>/edit_review">Edit Review</a>
+    <a id="edit_review" href="/reviews/<%= review.id %>/edit">Edit Review</a>
       <h5><%= review.title %></h5>
       <p><%= review.rating %></p>
       <p><%= review.content %></p>

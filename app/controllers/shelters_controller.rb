@@ -42,29 +42,4 @@ class SheltersController < ApplicationController
     Shelter.destroy(params[:id])
     redirect_to '/shelters'
   end
-
-  def new_review
-    @shelter = Shelter.find(params[:id])
-  end
-
-  def create_review
-    user = User.find_by(name: params[:review][:username])
-
-    review = Review.new(
-      title: params[:review][:title],
-      rating: params[:review][:rating],
-      content: params[:review][:content],
-      username: params[:review][:username],
-      image: params[:review][:image],
-      shelter_id: params[:id],
-      user_id: user_id
-    )
-
-    review.save
-    redirect_to "/shelters/#{params[:id]}"
-  end
-
-  def edit_review
-    require 'pry'; binding.pry
-  end
 end

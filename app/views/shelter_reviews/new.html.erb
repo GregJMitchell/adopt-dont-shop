@@ -16,7 +16,8 @@
   <h1>Create Review</h1>
   <div class="review_form">
 
-    <%= form_tag("/shelters/#{@shelter.id}", method: "post") do %>
+    <%= form_tag("/reviews", method: "post") do %>
+    <input type="hidden" name="review[shelter_id]" value='<%= @shelter.id %>'>
       <div class="review_labels">
         <%= label_tag("review[title]", "Title") %><br>
         <%= text_field_tag("review[title]") %>
@@ -46,8 +47,8 @@
       </div>
 
       <div class="review_labels">
-        <%= label_tag("review[username]", "Username") %><br>
-        <%= text_field_tag("review[username]") %>
+      <h4>Username</h4>
+        <%= select_tag 'review[username]', options_from_collection_for_select(@users, :id, :name), class: 'form-select' %>
       </div>
 
       <div class="review_labels">
