@@ -32,3 +32,15 @@ nisha = Pet.create(image: 'http://www.petharbor.com/get_image.asp?RES=thumb&ID=A
                    shelter_id: denver_dfl.id,
                    description: 'German Shepherd',
                    status: 'Adoptable')
+
+shelter_1 = Shelter.create(name: 'Dumb Friends League',
+                          address: '123 ABC Street',
+                          city: 'Denver',
+                          state: 'Colorado',
+                          zip: '12345')
+                          
+pet_1 = Pet.create(image: 'lib/assets/test_image',
+                  name: 'Test_dog',
+                  age: 5,
+                 sex: 'male',
+                 shelter_id: shelter_1.id.to_s)

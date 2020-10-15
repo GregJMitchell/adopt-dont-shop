@@ -5,35 +5,56 @@
     body{
       text-align: center;
     }
-    .button {
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
 
+    .user-button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    }
 
-.button {background-color: royalblue;}
+    .user-creation{
+      padding: 15px;
+      text-align: center;
+      display: block;
+      color: white;
+    }
+
   </style>
 </head>
 
-<body>  
-  <form action="/users" method="post">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <p>Username</p>
-    <input type='text' name='user[name]'/><br/>
-    <p>Street Address</p>
-    <input type='text' name='user[address]'/><br/>
-    <p>City</p>
-    <input type='text' name='user[city]'/><br/>
-    <p>State</p>
-    <input type='text' name='user[state]'/><br/>
-    <p>Zip</p>
-    <input type='text' name='user[zip]'/><br/>
-    <input class="button" id="submit_button" type='submit'/>
-  </form>
+<body>
+    <%= form_tag("/users", method: "post") do %>
+      <div class="user-creation">
+        <%= label_tag("user[name]", "Username") %><br>
+        <%= text_field_tag("user[name]") %>
+      </div>
+
+      <div class="user-creation">
+        <%= label_tag("user[address]", "Street Address") %><br>
+        <%= text_field_tag("user[address]") %>
+      </div>
+      <div class="user-creation">
+        <%= label_tag("user[city]", "City") %><br>
+        <%= text_field_tag("user[city]") %>
+      </div>
+
+      <div class="user-creation">
+        <%= label_tag("user[state]", "State") %><br>
+        <%= text_field_tag("user[state]") %>
+      </div>
+
+      <div class="user-creation">
+        <%= label_tag("user[zip]", "Zip") %><br>
+        <%= text_field_tag("user[zip]") %>
+      </div>
+
+      <div class="user-button">
+        <%= submit_tag("Create User") %>
+      </div>
+    <% end %>
 </body>

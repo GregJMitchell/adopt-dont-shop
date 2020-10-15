@@ -6,35 +6,54 @@
     body{
       text-align: center;
     }
-    .button {
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
+    .pet-button {
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
 
-
-.button {background-color: royalblue;}
+    .pet-creation{
+      padding: 15px;
+      text-align: center;
+      display: block;
+      color: white;
+    }
   </style>
 </head>
 
-<body>  
-  <form action="/shelters/<%= @shelter.id %>/pets" method="post">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <p>Pet Name</p>
-    <input type='text' name='pet[name]'/><br/>
-    <p>Pet Image</p>
-    <input type='text' name='pet[image]'/><br/>
-    <p>Age</p>
-    <input type='text' name='pet[age]'/><br/>
-    <p>Sex</p>
-    <input type='text' name='pet[sex]'/><br/>
-    <p>Description</p>
-    <input type='text' name='pet[description]'/><br/>
-    <input class="button" id="submit_button" type='submit'/>
-  </form>
+<body>
+  <%= form_tag("/shelters/#{@shelter.id}/pets", method: "post") do %>
+    <div class="pet-creation">
+      <%= label_tag("pet[name]", "Pet Name") %><br>
+      <%= text_field_tag("pet[name]") %>
+    </div>
+
+    <div class="pet-creation">
+      <%= label_tag("pet[image]", "Pet Image") %><br>
+      <%= text_field_tag("pet[image]") %>
+    </div>
+    <div class="pet-creation">
+      <%= label_tag("pet[age]", "Age") %><br>
+      <%= text_field_tag("pet[age]") %>
+    </div>
+
+    <div class="pet-creation">
+      <%= label_tag("pet[sex]", "Sex") %><br>
+      <%= text_field_tag("pet[sex]") %>
+    </div>
+
+    <div class="pet-creation">
+      <%= label_tag("pet[description]", "Description") %><br>
+      <%= text_field_tag("pet[description]") %>
+    </div>
+
+    <div class="pet-button">
+      <%= submit_tag("Add Pet") %>
+    </div>
+  <% end %>
 </body>
