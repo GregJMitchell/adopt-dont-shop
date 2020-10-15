@@ -47,8 +47,8 @@
       </div>
 
       <div class="review_labels">
-      <h4>Username</h4>
-        <%= select_tag 'review[username]', options_from_collection_for_select(@users, :id, :name), class: 'form-select' %>
+       <%= label_tag("review[username]", "Username") %>
+        <%= text_field_tag("review[username]")%>
       </div>
 
       <div class="review_labels">
