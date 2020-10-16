@@ -53,6 +53,7 @@ describe 'As a visitor' do
             visit "/reviews/#{review.id}/edit"
 
             fill_in 'review[title]', with: "New test"
+            find("#review_rating_1").click
             click_button "Update Review"
 
             expect(current_path).to eq("/shelters/#{shelter_1.id}")

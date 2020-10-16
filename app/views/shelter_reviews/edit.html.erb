@@ -15,8 +15,7 @@
 <body>
   <h1>Edit Review</h1>
   <div class="review_form">
-
-    <%= form_tag("/reviews", method: "post") do %>
+    <%= form_tag("/reviews/#{@review.id}", method: "patch") do %>
     <input type="hidden" name="review[shelter_id]" value='<%= @shelter.id %>'>
       <div class="review_labels">
         <%= label_tag("review[title]", "Title") %><br>
