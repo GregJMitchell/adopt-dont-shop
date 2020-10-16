@@ -20,6 +20,9 @@
     <li><a href="/pets">Pets</a></li>
   </ul>
 </nav>
+<% flash.each do |type, message| %>
+      <p><%= message %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
