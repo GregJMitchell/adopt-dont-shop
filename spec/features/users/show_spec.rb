@@ -42,4 +42,51 @@ describe 'As a visitor' do
       expect(page).to have_content(review.content)
     end
   end
+  describe "When I visit a User's show page" do
+    it "Then I see the average rating of all of their reviews" do
+      shelter = Shelter.create(name: 'Dumb Friends League',
+        address: '123 ABC Street',
+        city: 'Denver',
+        state: 'Colorado',
+        zip: '12345')
+      user_1 = User.create(name: 'Mike',
+        address: '123 ABC St.',
+        city: 'Denver',
+        state: 'CO',
+        zip: '12345')
+      review = Review.create(title: 'Pets',
+          rating: 5,
+          content: 'Adorable',
+          username: 'Mike',
+          image: '',
+          shelter_id: shelter.id,
+          user_id: user_1.id)
+      review2 = Review.create(title: 'Pets',
+          rating: 5,
+          content: 'Adorable',
+          username: 'Mike',
+          image: '',
+          shelter_id: shelter.id,
+          user_id: user_1.id)
+      review3 = Review.create(title: 'Pets',
+          rating: 3,
+          content: 'Adorable',
+          username: 'Mike',
+          image: '',
+          shelter_id: shelter.id,
+          user_id: user_1.id)
+      review4 = Review.create(title: 'Pets',
+          rating: 4,
+          content: 'Adorable',
+          username: 'Mike',
+          image: '',
+          shelter_id: shelter.id,
+          user_id: user_1.id)
+
+
+      visit "users/#{user_1.id}"
+
+      expect(page).to have_content("Average Review of User: 4.25/5")
+    end
+  end
 end
