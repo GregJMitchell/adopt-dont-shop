@@ -15,12 +15,12 @@ describe 'As a visitor' do
                 state: 'CO',
                 zip: '12345')
             review = Review.create(title: 'test title',
-                rating: 5,
-                content: 'Content of the review',
-                image: '',
-                username: user_1.name,
-                user_id: user_1.id,
-                shelter_id: shelter_1.id)
+                  rating: 5,
+                  content: 'Content of the review',
+                  image: '',
+                  username: user_1.name,
+                  user_id: user_1.id,
+                  shelter_id: shelter_1.id)
 
                 visit "/shelters/#{shelter_1.id}"
               expect(page).to have_link("Edit Review")
@@ -33,10 +33,10 @@ describe 'As a visitor' do
           end
           it "When the form is submitted, I should return to that shelter's show page And I can see my updated review" do
             shelter_1 = Shelter.create(name: 'Dumb Friends League',
-              address: '123 ABC Street',
-              city: 'Denver',
-              state: 'Colorado',
-              zip: '12345')
+                                      address: '123 ABC Street',
+                                      city: 'Denver',
+                                      state: 'Colorado',
+                                      zip: '12345')
             user_1 = User.create(name: 'Mike',
               address: '123 ABC St.',
               city: 'Denver',
@@ -65,10 +65,10 @@ describe 'As a visitor' do
     describe "There should be a link to delete the specific review" do
       it "should delete the review" do
         shelter_1 = Shelter.create(name: 'Dumb Friends League',
-          address: '123 ABC Street',
-          city: 'Denver',
-          state: 'Colorado',
-          zip: '12345')
+                                  address: '123 ABC Street',
+                                  city: 'Denver',
+                                  state: 'Colorado',
+                                  zip: '12345')
         user_1 = User.create(name: 'Mike',
           address: '123 ABC St.',
           city: 'Denver',
@@ -86,6 +86,71 @@ describe 'As a visitor' do
         
         click_button "Delete Review"
         expect(page).not_to have_content(review.title)
+      end
+    end
+    describe "When I visit the new review page" do
+      it "And I fail to enter a title, a rating, and/or content in the new shelter review form, but still try to submit the form
+       I see a flash message indicating that I need to fill in a title, rating, and content in order to submit a shelter review
+       And I'm returned to the new form to create a new review" do
+          shelter_1 = Shelter.create(name: 'Dumb Friends League',
+                  address: '123 ABC Street',
+                  city: 'Denver',
+                  state: 'Colorado',
+                  zip: '12345')
+            user_1 = User.create(name: 'Jose',
+                  address: '123 ABC Street',
+                  city: 'Denver',
+                  state: 'Colorado',
+                  zip: '12345')
+              review = Review.create(title: 'test title',
+                rating: 5,
+                content: 'Content of the review',
+                image: '',
+                username: user_1.name,
+                user_id: user_1.id,
+                shelter_id: shelter_1.id)
+          
+
+          visit "/reviews/#{review.id}/edit"
+
+          fill_in 'review[username]', with: ''
+          fill_in 'review[title]', with: ''
+          fill_in 'review[content]', with: ''
+
+          click_button 'Update Review'
+
+          expect(page).to have_content("Review not created: Required information missing.")
+
+      end
+      it "should flash message if username is nil" do
+        shelter_1 = Shelter.create(name: 'Dumb Friends League',
+          address: '123 ABC Street',
+          city: 'Denver',
+          state: 'Colorado',
+          zip: '12345')
+          user_1 = User.create(name: 'Jose',
+            address: '123 ABC Street',
+            city: 'Denver',
+            state: 'Colorado',
+            zip: '12345')
+        
+        
+
+            review = Review.create(title: 'test title',
+              rating: 5,
+              content: 'Content of the review',
+              image: '',
+              username: user_1.name,
+              user_id: user_1.id,
+              shelter_id: shelter_1.id)
+        
+
+        visit "/reviews/#{review.id}/edit"
+        
+
+        click_button 'Update Review'
+
+        expect(page).to have_content("Review not created: Required information missing.")
       end
     end
 end

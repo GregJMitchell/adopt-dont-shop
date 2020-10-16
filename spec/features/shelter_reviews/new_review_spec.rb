@@ -75,5 +75,25 @@ RSpec.describe 'New Review' do
           expect(page).to have_content("Review not created: Required information missing.")
 
       end
+      it "should flash message if username is nil" do
+        shelter_1 = Shelter.create(name: 'Dumb Friends League',
+          address: '123 ABC Street',
+          city: 'Denver',
+          state: 'Colorado',
+          zip: '12345')
+          user_1 = User.create(name: 'Jose',
+            address: '123 ABC Street',
+            city: 'Denver',
+            state: 'Colorado',
+            zip: '12345')
+        
+        
+
+        visit "/shelters/#{shelter_1.id}/reviews/new"
+
+        click_button 'Create Review'
+
+        expect(page).to have_content("Review not created: Required information missing.")
+      end
     end
 end
