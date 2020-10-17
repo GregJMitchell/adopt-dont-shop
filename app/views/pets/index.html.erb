@@ -20,6 +20,7 @@ h4 {
   </Article>
 
   <section>
+  <button class="button"><a href="/applications/new">Start an Application</a></button>
     <% @pets.each do |pet| %>
     <div class="div1">
         <h3>Pet Name: <a href="/pets/<%= pet.id %>"><%= pet.name%></a></h3>
