@@ -32,4 +32,7 @@ Rails.application.routes.draw do
   get "/reviews/:id/edit", to: "shelter_reviews#edit"
   patch '/reviews/:id', to: "shelter_reviews#update"
   delete '/reviews/:id', to: 'shelter_reviews#destroy'
+
+  #applications
+  get "/applications/:id", to: "user_applications#show"
 end
