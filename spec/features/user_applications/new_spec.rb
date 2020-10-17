@@ -16,6 +16,13 @@ describe 'New Application' do
       end
       describe "When I click submit, Then I am taken to the new application's show page " do
         it "And I see my user listed along with all of my address information And I see an indicator that this application is 'In Progress'" do
+          
+          user_1 = User.create(name: 'Mike',
+            address: '123 ABC St.',
+            city: 'Denver',
+            state: 'CO',
+            zip: '12345')
+          
           visit "/applications/new"
 
           fill_in 'application[name]', with: "Mike"

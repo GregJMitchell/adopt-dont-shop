@@ -35,6 +35,6 @@ Rails.application.routes.draw do
 
   #applications
   get "applications/new", to: "user_applications#new"
-  
+  post "applications", to: "user_applications#create"
   get "/applications/:id", to: "user_applications#show"
 end
