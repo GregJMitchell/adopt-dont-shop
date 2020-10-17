@@ -6,4 +6,7 @@
 <%= @application.zip %>
 <%= @application.description %>
 <%= @application.status %>
+<% @application.pets.each do |pet| %>
+    <%= pet.name %>
+<% end %>
 </body>
