@@ -13,7 +13,27 @@ describe 'New Application' do
         !find_field('application[state]').value
         !find_field('application[zip]').value
         !find_field('application[description]').value
-        !find_field('application[username]').value
+      end
+      describe "When I click submit, Then I am taken to the new application's show page " do
+        it "And I see my user listed along with all of my address information And I see an indicator that this application is 'In Progress'" do
+          visit "/applications/new"
+
+          fill_in 'application[name]', with: "Mike"
+          fill_in 'application[address]', with: "123 ABC St."
+          fill_in 'application[city]', with: "Denver"
+          fill_in 'application[state]', with: "CO"
+          fill_in 'application[zip]', with: "12345"
+          fill_in 'application[description]', with: "testing"
+          click_button 'Create Application'
+
+          expect(current_path).to eq("/applications/#{UserApplication.all.last.id}")
+          expect(page).to have_content("Mike")
+          expect(page).to have_content("123 ABC St.")
+          expect(page).to have_content("CO")
+          expect(page).to have_content("Denver")
+          expect(page).to have_content("12345")
+          expect(page).to have_content("testing")
+        end
       end
     end
   end
