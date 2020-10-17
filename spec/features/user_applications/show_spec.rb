@@ -80,14 +80,15 @@ describe 'New Application' do
                 
             application = UserApplication.create!(name: "", address: "", city: "", state: "", zip:"",
                   description: "", status: "", user_id: user_1.id)
-            PetApplication.create(pet_id: pet_1.id, user_application_id: application.id)
+            
           
           visit "/applications/#{application.id}"
 
           fill_in 'search[name]', with: "Test_dog"
           click_button 'Search'
 
-          
+          expect(current_path).to eq("/applications/#{application.id}")
+          expect(page).to have_content(pet_1.name)
         end
       end
     end
