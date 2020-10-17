@@ -41,6 +41,18 @@ describe 'New Application' do
           expect(page).to have_content("12345")
           expect(page).to have_content("testing")
         end
+        it "When I fail to enter a valid username, I am returned to the new application page and flashed a message" do
+          visit "/applications/new"
+          
+          fill_in 'application[name]', with: "Mike"
+          fill_in 'application[address]', with: "123 ABC St."
+          fill_in 'application[city]', with: "Denver"
+          fill_in 'application[state]', with: "CO"
+          fill_in 'application[zip]', with: "12345"
+          fill_in 'application[description]', with: "testing"
+          click_button 'Create Application'
+          expect(page).to have_content("Application not created: Username not found.")
+        end
       end
     end
   end
