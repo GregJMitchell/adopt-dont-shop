@@ -33,4 +33,18 @@
     </div>
     <% end %>
   </div>
+
+  <footer id="highlighted-reviews">
+    <h2>Highlighted Reviews</h2>
+   <h3>Best Rating</h3>
+    <% if !@user.reviews.empty? %>
+      <%= @user.best_review.title %>
+      <%= @user.best_review.rating %>
+      <%= @user.best_review.content %>
+      <h3>Worst Rating</h3>
+      <%= @user.worst_review.title %>
+      <%= @user.worst_review.rating %>
+      <%= @user.worst_review.content %>
+    <% end %>
+  </footer>
 </body>

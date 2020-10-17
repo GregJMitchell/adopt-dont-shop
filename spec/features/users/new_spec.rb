@@ -24,7 +24,7 @@ describe 'As a visitor' do
       fill_in 'user[state]', with: "CO"
       fill_in 'user[zip]', with: "12345"
       click_button 'Create User'
-      expect(current_path).to eq("/users/#{User.all[-1].id}")
+      expect(current_path).to eq("/users/#{User.last.id}")
       expect(page).to have_content(user_1.name)
       expect(page).to have_content(user_1.address)
       expect(page).to have_content(user_1.city)
