@@ -37,6 +37,7 @@ describe 'New Application' do
       expect(page).to have_content(application.zip)
       expect(page).to have_content(application.description)
       expect(page).to have_content(application.status)
+      expect(page).to have_content(pet_1.name)
 
 
 
