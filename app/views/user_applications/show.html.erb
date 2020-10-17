@@ -1,7 +1,8 @@
 <body>
 <article>
     <h2>Add a Pet to this Application</h2>
-    <%= form_tag("/applications/#{@application.id}/pets", method: 'get') do %>
+    <%= form_tag("/applications/#{@application.id}/pets", method: 'post') do %>
+    <input type="hidden" name="search[user_id]" value='<%= @application.user_id %>'>
       <%= text_field_tag('search[name]') %>
       <%= submit_tag("Search") %>
     <% end %>
@@ -15,9 +16,10 @@
     <p><%= @application.description %></p>
     <p><%= @application.status %></p>
     <p>
-    <% @application.pets.each do |pet| %>
-        <%= pet.name %>
-    <% end %>
-    </p>
+    <div class="div1">
+        <% @application.pets.each do |pet| %>
+            <p><%= pet.name %></p>
+        <% end %>
+    </div>
 </section>
 </body>
