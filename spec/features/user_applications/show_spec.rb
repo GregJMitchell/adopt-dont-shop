@@ -68,8 +68,8 @@ describe 'New Application' do
         
         visit "/applications/#{application.id}"
 
-        expect(page).to have_content("Search for Pets")
-        !find_field('pet[name]')
+        expect(page).to have_content("Add a Pet to this Application")
+        !find_field('search[:name]')
       end
     end
   end

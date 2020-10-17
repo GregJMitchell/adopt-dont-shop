@@ -1,12 +1,23 @@
 <body>
-<%= @application.name %>
-<%= @application.address %>
-<%= @application.state %>
-<%= @application.city %>
-<%= @application.zip %>
-<%= @application.description %>
-<%= @application.status %>
-<% @application.pets.each do |pet| %>
-    <%= pet.name %>
-<% end %>
+<article>
+    <h2>Add a Pet to this Application</h2>
+    <%= form_tag("/applications/#{@application.id}/pets", method: 'get') do %>
+      <%= text_field_tag('search[:name]') %>
+      <%= submit_tag("Search", name: nil) %>
+    <% end %>
+</article>
+<section>
+    <p><%= @application.name %></p>
+    <p><%= @application.address %></p>
+    <p><%= @application.state %></p>
+    <p><%= @application.city %></p>
+    <p><%= @application.zip %></p>
+    <p><%= @application.description %></p>
+    <p><%= @application.status %></p>
+    <p>
+    <% @application.pets.each do |pet| %>
+        <%= pet.name %>
+    <% end %>
+    </p>
+</section>
 </body>
