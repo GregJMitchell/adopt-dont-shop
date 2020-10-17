@@ -42,5 +42,55 @@ describe 'New Application' do
 
 
     end
+    describe "And that application has not been submitted," do
+      it "Then I see a section on the page to Add a Pet to this Application 
+      In that section I see an input where I can search for Pets by name" do
+      user_1 = User.create(name: 'Jose',
+        address: '123 ABC Street',
+        city: 'Denver',
+        state: 'Colorado',
+        zip: '12345')  
+              
+          application = UserApplication.create!(name: "", address: "", city: "", state: "", zip:"",
+                description: "", status: "", user_id: user_1.id)
+        
+        visit "/applications/#{application.id}"
+
+        expect(page).to have_content("Add a Pet to this Application")
+        !find_field('search[name]')
+      end
+      describe "When I fill in this field with a Pet's name And I click submit," do
+        it "Then I am taken back to the application show page And under the search bar I see any Pet whose name matches my search" do
+          user_1 = User.create(name: 'Jose',
+            address: '123 ABC Street',
+            city: 'Denver',
+            state: 'Colorado',
+            zip: '12345')  
+            shelter_1 = Shelter.create(name: 'Dumb Friends League',
+              address: '123 ABC Street',
+              city: 'Denver',
+              state: 'Colorado',
+              zip: '12345')
+            pet_1 = Pet.create(image: 'lib/assets/test_image',
+                name: 'Test_dog',
+                age: 5,
+                sex: 'male',
+                shelter_id: shelter_1.id)
+      
+                
+            application = UserApplication.create!(name: "", address: "", city: "", state: "", zip:"",
+                  description: "", status: "", user_id: user_1.id)
+            
+          
+          visit "/applications/#{application.id}"
+
+          fill_in 'search[name]', with: "Test_dog"
+          click_button 'Search'
+
+          expect(current_path).to eq("/applications/#{application.id}")
+          expect(page).to have_content(pet_1.name)
+        end
+      end
+    end
   end
 end
