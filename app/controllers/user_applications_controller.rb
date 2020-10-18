@@ -36,4 +36,21 @@ class UserApplicationsController < ApplicationController
       @found_pets = []
     end
   end
+
+  def update
+    application = UserApplication.find(params[:id])
+    
+    application.update(
+      name: params[:application][:name],
+      address: application.address,
+      city: application.city,
+      state: application.state,
+      zip: application.zip,
+      description: params[:application][:description],
+      status: "Pending",
+      user_id: application.user.id
+    )
+    application.save!
+    redirect_to "/applications/#{application.id}"
+  end
 end

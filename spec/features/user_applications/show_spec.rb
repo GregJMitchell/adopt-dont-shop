@@ -124,6 +124,53 @@ describe 'New Application' do
 
             expect(application.pets[0]).to eq(pet_1)
           end
+          describe "Then I see a section to submit my application" do
+            describe "And in that section I see an input to enter why I would make a good owner for these pet(s)" do
+              describe "When I fill in that input And I click a button to submit this application" do
+                it "Then I am taken back to the application's show page
+                And I see an indicator that the application is 'Pending'
+                And I see all the pets that I want to adopt
+                And I do not see a section to add more pets to this application" do
+                  user_1 = User.create(name: 'Jose',
+                    address: '123 ABC Street',
+                    city: 'Denver',
+                    state: 'Colorado',
+                    zip: '12345')  
+                    shelter_1 = Shelter.create(name: 'Dumb Friends League',
+                      address: '123 ABC Street',
+                      city: 'Denver',
+                      state: 'Colorado',
+                      zip: '12345')
+                    pet_1 = Pet.create(image: 'lib/assets/test_image',
+                        name: 'Test_dog',
+                        age: 5,
+                        sex: 'male',
+                        shelter_id: shelter_1.id)
+              
+                        
+                    application = UserApplication.create!(name: "Jose", address: "123 ABC Street", city: "Denver", state: "CO", zip:"12345",
+                          description: "test12", status: "In Progress", user_id: user_1.id)
+                    PetApplication.create(pet_id: pet_1.id, user_application_id: application.id)
+                  
+                  
+                  visit "/applications/#{application.id}"
+
+                  expect(page).to have_content('Finalize your Application')
+                  !find_field("Why would you make a good owner for these pet(s)?")
+                  expect(page).to have_button("Submit Application")
+
+                  fill_in "application[description]", with: "testing"
+                  click_button "Submit Application"
+
+                  expect(page).to have_content('Pending')
+                  application.pets.each do |pet|
+                    expect(page).to have_content(pet.name)
+                  end
+                  expect(page).not_to have_button('Add a Pet to this Application')
+                end
+              end
+            end
+          end
         end
       end
     end
