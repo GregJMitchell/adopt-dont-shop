@@ -1,10 +1,16 @@
 class UserApplication < ApplicationRecord
   belongs_to :user
-  
+
   has_many :pet_applications
   has_many :pets, through: :pet_applications
 
   def self.find_pets(name)
-    Pet.where(name: name).all
+    pets = []
+    Pet.all.each do |pet|
+      if pet.name.include?(pet.name)
+        pets << Pet.where(name: "#{pet.name}").all
+      end
+    end
+    pets.flatten
   end
 end
