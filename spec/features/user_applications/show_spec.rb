@@ -187,6 +187,35 @@ describe 'New Application' do
               expect(page).not_to have_content("Finalize your Application")
             end
           end
+
+          describe "If I fail to enter why I would make a good owner for these pet(s)" do
+            it "I see a flash message that I need to fill out that field before I can submit the application" do
+              user_1 = User.create(name: 'Jose',
+                address: '123 ABC Street',
+                city: 'Denver',
+                state: 'Colorado',
+                zip: '12345')
+                shelter_1 = Shelter.create(name: 'Dumb Friends League',
+                  address: '123 ABC Street',
+                  city: 'Denver',
+                  state: 'Colorado',
+                  zip: '12345')
+                pet_1 = Pet.create(image: 'lib/assets/test_image',
+                    name: 'Test_dog',
+                    age: 5,
+                    sex: 'male',
+                    shelter_id: shelter_1.id)
+
+
+                application = UserApplication.create!(name: "Jose", address: "123 ABC Street", city: "Denver", state: "CO", zip:"12345",
+                      description: "test12", status: "In Progress", user_id: user_1.id)
+
+                visit "/applications/#{application.id}"
+                click_button 'Submit Application'
+
+                expect(page).to have_content("Application not created: description not found.")
+            end
+          end
         end
       end
     end
