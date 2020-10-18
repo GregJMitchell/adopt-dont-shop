@@ -2,16 +2,16 @@ require 'rails_helper'
 
 describe 'New Application' do
   describe "When I visit an applications show page '/applications/:id'" do
-    it "Then I can see the following: Name of the User on the Application, 
-    Full Address of the User on the Application, Description of why the applicant 
-    says they'd be a good home for this pet(s), names of all pets that this 
-    application is for (all names of pets should be links to their show page), 
+    it "Then I can see the following: Name of the User on the Application,
+    Full Address of the User on the Application, Description of why the applicant
+    says they'd be a good home for this pet(s), names of all pets that this
+    application is for (all names of pets should be links to their show page),
     The Application's status, either 'In Progress', 'Pending', 'Accepted', or 'Rejected'" do
     user_1 = User.create(name: 'Jose',
       address: '123 ABC Street',
       city: 'Denver',
       state: 'Colorado',
-      zip: '12345')  
+      zip: '12345')
       shelter_1 = Shelter.create(name: 'Dumb Friends League',
         address: '123 ABC Street',
         city: 'Denver',
@@ -23,11 +23,11 @@ describe 'New Application' do
           sex: 'male',
           shelter_id: shelter_1.id)
 
-          
+
       application = UserApplication.create!(name: "", address: "", city: "", state: "", zip:"",
             description: "", status: "", user_id: user_1.id)
       PetApplication.create(pet_id: pet_1.id, user_application_id: application.id)
-            
+
       visit "/applications/#{application.id}"
 
       expect(page).to have_content(application.name)
@@ -43,17 +43,17 @@ describe 'New Application' do
 
     end
     describe "And that application has not been submitted," do
-      it "Then I see a section on the page to Add a Pet to this Application 
+      it "Then I see a section on the page to Add a Pet to this Application
       In that section I see an input where I can search for Pets by name" do
       user_1 = User.create(name: 'Jose',
         address: '123 ABC Street',
         city: 'Denver',
         state: 'Colorado',
-        zip: '12345')  
-              
+        zip: '12345')
+
           application = UserApplication.create!(name: "", address: "", city: "", state: "", zip:"",
                 description: "", status: "", user_id: user_1.id)
-        
+
         visit "/applications/#{application.id}"
 
         expect(page).to have_content("Add a Pet to this Application")
@@ -65,7 +65,7 @@ describe 'New Application' do
             address: '123 ABC Street',
             city: 'Denver',
             state: 'Colorado',
-            zip: '12345')  
+            zip: '12345')
             shelter_1 = Shelter.create(name: 'Dumb Friends League',
               address: '123 ABC Street',
               city: 'Denver',
@@ -76,12 +76,12 @@ describe 'New Application' do
                 age: 5,
                 sex: 'male',
                 shelter_id: shelter_1.id)
-      
-                
+
+
             application = UserApplication.create!(name: "", address: "", city: "", state: "", zip:"",
                   description: "", status: "", user_id: user_1.id)
-            
-          
+
+
           visit "/applications/#{application.id}"
 
           fill_in 'search[name]', with: "Test_dog"
@@ -96,7 +96,7 @@ describe 'New Application' do
               address: '123 ABC Street',
               city: 'Denver',
               state: 'Colorado',
-              zip: '12345')  
+              zip: '12345')
               shelter_1 = Shelter.create(name: 'Dumb Friends League',
                 address: '123 ABC Street',
                 city: 'Denver',
@@ -107,12 +107,12 @@ describe 'New Application' do
                   age: 5,
                   sex: 'male',
                   shelter_id: shelter_1.id)
-        
-                  
+
+
               application = UserApplication.create!(name: "", address: "", city: "", state: "", zip:"",
                     description: "", status: "", user_id: user_1.id)
-            
-            
+
+
             visit "/applications/#{application.id}"
 
             fill_in 'search[name]', with: "Test_dog"
@@ -135,7 +135,7 @@ describe 'New Application' do
                     address: '123 ABC Street',
                     city: 'Denver',
                     state: 'Colorado',
-                    zip: '12345')  
+                    zip: '12345')
                     shelter_1 = Shelter.create(name: 'Dumb Friends League',
                       address: '123 ABC Street',
                       city: 'Denver',
@@ -146,13 +146,13 @@ describe 'New Application' do
                         age: 5,
                         sex: 'male',
                         shelter_id: shelter_1.id)
-              
-                        
+
+
                     application = UserApplication.create!(name: "Jose", address: "123 ABC Street", city: "Denver", state: "CO", zip:"12345",
                           description: "test12", status: "In Progress", user_id: user_1.id)
                     PetApplication.create(pet_id: pet_1.id, user_application_id: application.id)
-                  
-                  
+
+
                   visit "/applications/#{application.id}"
 
                   expect(page).to have_content('Finalize your Application')
@@ -169,6 +169,51 @@ describe 'New Application' do
                   expect(page).not_to have_button('Add a Pet to this Application')
                 end
               end
+            end
+          end
+          describe "When I visit an application's show page And I have not added any pets to the application" do
+            it "Then I do not see a section to submit my application" do
+              user_1 = User.create(name: 'Jose',
+                address: '123 ABC Street',
+                city: 'Denver',
+                state: 'Colorado',
+                zip: '12345')
+
+              application = UserApplication.create!(name: "Jose", address: "123 ABC Street", city: "Denver",
+                                                    state: "CO", zip:"12345",
+                                                    description: "test12", status: "In Progress", user_id: user_1.id)
+              visit "/applications/#{application.id}"
+
+              expect(page).not_to have_content("Finalize your Application")
+            end
+          end
+
+          describe "If I fail to enter why I would make a good owner for these pet(s)" do
+            it "I see a flash message that I need to fill out that field before I can submit the application" do
+              user_1 = User.create(name: 'Jose',
+                address: '123 ABC Street',
+                city: 'Denver',
+                state: 'Colorado',
+                zip: '12345')
+                shelter_1 = Shelter.create(name: 'Dumb Friends League',
+                  address: '123 ABC Street',
+                  city: 'Denver',
+                  state: 'Colorado',
+                  zip: '12345')
+                pet_1 = Pet.create(image: 'lib/assets/test_image',
+                    name: 'Test_dog',
+                    age: 5,
+                    sex: 'male',
+                    shelter_id: shelter_1.id)
+
+
+                application = UserApplication.create!(name: "Jose", address: "123 ABC Street", city: "Denver", state: "CO", zip:"12345",
+                      description: "test12", status: "In Progress", user_id: user_1.id)
+
+                visit "/applications/#{application.id}"
+                click_button 'Submit Application'
+
+                expect(page).to have_content("Application not created: description not found.")
             end
           end
         end

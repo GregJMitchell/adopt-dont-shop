@@ -29,6 +29,7 @@ class UserApplicationsController < ApplicationController
   end
 
   def show
+    @pets = Pet.all
     @application = UserApplication.find(params[:id])
     if params[:search]
       @found_pets = UserApplication.find_pets(params[:search][:name])
@@ -39,18 +40,16 @@ class UserApplicationsController < ApplicationController
 
   def update
     application = UserApplication.find(params[:id])
-    
+    if params[:application][:description] == ""
+      flash[:notice] = "Application not created: description not found."
+      redirect_to "/applications/#{application.id}"
+    else
     application.update(
-      name: params[:application][:name],
-      address: application.address,
-      city: application.city,
-      state: application.state,
-      zip: application.zip,
-      description: params[:application][:description],
-      status: "Pending",
-      user_id: application.user.id
-    )
+        description: params[:application][:description],
+        status: "Pending",
+      )
     application.save!
-    redirect_to "/applications/#{application.id}"
+     redirect_to "/applications/#{application.id}"
+    end
   end
 end
