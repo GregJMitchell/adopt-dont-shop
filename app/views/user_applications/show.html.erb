@@ -1,10 +1,16 @@
 <body>
 <article>
     <h2>Add a Pet to this Application</h2>
-    <%= form_tag("/applications/#{@application.id}/pets", method: 'post') do %>
-    <input type="hidden" name="search[user_id]" value='<%= @application.user_id %>'>
+    <%= form_tag("/applications/#{@application.id}", method: 'get') do %>
       <%= text_field_tag('search[name]') %>
       <%= submit_tag("Search") %>
+    <% end %>
+    <% @found_pets.each do |pet| %>
+        <h3><%= pet.name if pet != nil %></h3>
+        <%= form_tag("/applications/#{@application.id}/pets", method: 'post') do %>
+            <input type="hidden" name="pet[pet_id]" value='<%= pet.id%>'>
+            <%= submit_tag("Add Pet") %>
+        <% end %>
     <% end %>
 </article>
 <section>
