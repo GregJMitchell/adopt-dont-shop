@@ -30,5 +30,10 @@ class UserApplicationsController < ApplicationController
 
   def show
     @application = UserApplication.find(params[:id])
+    if params[:search]
+      @found_pets = UserApplication.find_pets(params[:search][:name])
+    else
+      @found_pets = []
+    end
   end
 end
