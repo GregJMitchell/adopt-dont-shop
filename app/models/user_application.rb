@@ -7,7 +7,7 @@ class UserApplication < ApplicationRecord
   def self.find_pets(name)
     pets = []
     Pet.all.each do |pet|
-      if pet.name.include?(pet.name)
+      if pet.name.upcase.include?(name.upcase)
         pets << Pet.where(name: "#{pet.name}").all
       end
     end
