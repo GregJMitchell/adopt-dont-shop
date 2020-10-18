@@ -1,15 +1,28 @@
+<head>
+    <style>
+        .app-creation{
+      padding: 15px;
+      text-align: center;
+      display: block;
+      color: white;
+    }
+    </style>
+</head>
+
 <body>
 <article>
-    <h2>Add a Pet to this Application</h2>
-    <%= form_tag("/applications/#{@application.id}", method: 'get') do %>
-      <%= text_field_tag('search[name]') %>
-      <%= submit_tag("Search") %>
-    <% end %>
-    <% @found_pets.each do |pet| %>
-        <h3><%= pet.name if pet != nil %></h3>
-        <%= form_tag("/applications/#{@application.id}/pets", method: 'post') do %>
-            <input type="hidden" name="pet[pet_id]" value='<%= pet.id%>'>
-            <%= submit_tag("Add Pet") %>
+    <% if @application.status != "Pending" %>
+        <h2>Add a Pet to this Application</h2>
+        <%= form_tag("/applications/#{@application.id}", method: 'get') do %>
+        <%= text_field_tag('search[name]') %>
+        <%= submit_tag("Search") %>
+        <% end %>
+        <% @found_pets.each do |pet| %>
+            <h3><%= pet.name if pet != nil %></h3>
+            <%= form_tag("/applications/#{@application.id}/pets", method: 'post') do %>
+                <input type="hidden" name="pet[pet_id]" value='<%= pet.id%>'>
+                <%= submit_tag("Add Pet") %>
+            <% end %>
         <% end %>
     <% end %>
 </article>
@@ -19,7 +32,6 @@
     <p><%= @application.state %></p>
     <p><%= @application.city %></p>
     <p><%= @application.zip %></p>
-    <p><%= @application.description %></p>
     <p><%= @application.status %></p>
     <p>
     <div class="div1">
@@ -28,4 +40,16 @@
         <% end %>
     </div>
 </section>
+<footer>
+     <% if @application.status != "Pending" %>
+        <h3>Finalize your Application</h3>
+        <%= form_tag("/applications/#{@application.id}", method: 'patch') do %>
+            <div class="app-creation">
+                <%= label_tag("application[description]", "Why would you make a good owner for these pet(s)?") %><br>
+                <%= text_field_tag("application[description]") %>
+            </div>
+        <%= submit_tag("Submit Application") %>
+        <% end %>
+    <% end %>
+</footer>
 </body>
