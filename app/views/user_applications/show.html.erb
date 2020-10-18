@@ -41,7 +41,7 @@
     </div>
 </section>
 <footer>
-     <% if @application.status != "Pending" %>
+     <% if @application.status != "Pending" && !@pets.empty? %>
         <h3>Finalize your Application</h3>
         <%= form_tag("/applications/#{@application.id}", method: 'patch') do %>
             <div class="app-creation">

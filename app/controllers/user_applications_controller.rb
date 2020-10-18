@@ -29,6 +29,7 @@ class UserApplicationsController < ApplicationController
   end
 
   def show
+    @pets = Pet.all
     @application = UserApplication.find(params[:id])
     if params[:search]
       @found_pets = UserApplication.find_pets(params[:search][:name])
@@ -39,7 +40,7 @@ class UserApplicationsController < ApplicationController
 
   def update
     application = UserApplication.find(params[:id])
-    
+
     application.update(
       name: params[:application][:name],
       address: application.address,
