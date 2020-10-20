@@ -23,8 +23,13 @@ class UserApplication < ApplicationRecord
       false
     elsif pet_apps.any? { |pet_app| pet_app.status.nil? }
       'pending'
-    elsif pet_apps.all? { |pet_app| pet_app.status == 'Approve' }
+    elsif pet_apps.all? { |pet_app| pet_app.status == 'Approve'}
       true
     end
+  end
+
+  def self.pet_application_approved?(pet)
+    apps = PetApplication.where(pet_id: pet)
+    apps.any? { |app| app.status == 'Approve' }
   end
 end

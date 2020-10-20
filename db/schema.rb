@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 2020_10_20_000829) do
     t.string "city"
     t.string "state"
     t.string "zip"
+    t.bigint "review_id"
+    t.index ["review_id"], name: "index_shelters_on_review_id"
   end
 
   create_table "user_applications", force: :cascade do |t|
@@ -79,5 +81,6 @@ ActiveRecord::Schema.define(version: 2020_10_20_000829) do
   add_foreign_key "pets", "shelters"
   add_foreign_key "reviews", "shelters"
   add_foreign_key "reviews", "users"
+  add_foreign_key "shelters", "reviews"
   add_foreign_key "user_applications", "users"
 end
