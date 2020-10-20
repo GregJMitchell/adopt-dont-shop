@@ -1,6 +1,6 @@
 <body>
 <header>
-  <h1><%= @application.status %></h1>
+  <h1 id="app-status" ><%= @application.status %></h1>
 </header>
 <div>
 
@@ -10,15 +10,19 @@
     <%= "Rejected" if UserApplication.find_pet_applications(@application.id, pet.id).status == ('Reject') %></p>
     <% if UserApplication.find_pet_applications(@application.id, pet.id).status != 'Approve' && 
           UserApplication.find_pet_applications(@application.id, pet.id).status != "Reject"%>
-        <%= form_tag("/admin/applications/#{@application.id}", method: 'patch') do %>
-          <input type="hidden" name="status" value='Approve'>
-          <input type="hidden" name="pet" value="<%= pet.id %>">
-          <%= submit_tag("Approve") %>
-        <% end %>
-        <%= form_tag("/admin/applications/#{@application.id}", method: 'patch') do %>
-          <input type="hidden" name="pet" value="<%= pet.id %>">
-          <input type="hidden" name="status" value='Reject'>
-          <%= submit_tag("Reject") %>
+          <div id="approve-button-<%= pet.id %>">
+            <%= form_tag("/admin/applications/#{@application.id}", method: 'patch') do %>
+              <input type="hidden" name="status" value='Approve'>
+              <input type="hidden" name="pet" value="<%= pet.id %>">
+              <%= submit_tag("Approve") %>
+            <% end %>
+          </div>
+          <div id="reject-button-<%= pet.id %>">
+            <%= form_tag("/admin/applications/#{@application.id}", method: 'patch') do %>
+              <input type="hidden" name="pet" value="<%= pet.id %>">
+              <input type="hidden" name="status" value='Reject'>
+              <%= submit_tag("Reject") %>
+          </div>
         <% end %>
     <% end %>
   <% end %>
