@@ -18,11 +18,11 @@ describe 'As a visitor' do
                            zip: '12345')
 
       visit '/users/new'
-      fill_in 'user[name]', with: "Mike"
-      fill_in 'user[address]', with: "123 ABC St."
-      fill_in 'user[city]', with: "Denver"
-      fill_in 'user[state]', with: "CO"
-      fill_in 'user[zip]', with: "12345"
+      fill_in 'user[name]', with: 'Mike'
+      fill_in 'user[address]', with: '123 ABC St.'
+      fill_in 'user[city]', with: 'Denver'
+      fill_in 'user[state]', with: 'CO'
+      fill_in 'user[zip]', with: '12345'
       click_button 'Create User'
       expect(current_path).to eq("/users/#{User.last.id}")
       expect(page).to have_content(user_1.name)
