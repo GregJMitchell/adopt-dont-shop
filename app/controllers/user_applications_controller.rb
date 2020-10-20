@@ -11,19 +11,15 @@ class UserApplicationsController < ApplicationController
     else
       application = UserApplication.new(
         name: params[:application][:name],
-        address: params[:application][:address],
-        city: params[:application][:city],
-        state: params[:application][:state],
-        zip: params[:application][:zip],
-        description: params[:application][:description],
+        address: user.address,
+        city: user.city,
+        state: user.state,
+        zip: user.zip,
         status: "In Progress",
         user_id: user.id
       )
       if application.save!
         redirect_to "/applications/#{application.id}"
-      else
-        flash[:notice] = "Application not created: Required information missing."
-        render :new
       end
     end
   end
