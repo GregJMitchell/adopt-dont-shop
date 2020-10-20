@@ -1,0 +1,26 @@
+<body>
+<header>
+  <h1>Test</h1>
+</header>
+<div>
+
+  <% @application.pets.each do |pet| %>
+    <p><%= pet.name %>: 
+    <%= "Approved" if UserApplication.find_pet_applications(@application.id, pet.id).status == ('Approve') %>
+    <%= "Rejected" if UserApplication.find_pet_applications(@application.id, pet.id).status == ('Reject') %></p>
+    <% if UserApplication.find_pet_applications(@application.id, pet.id).status != 'Approve' && 
+          UserApplication.find_pet_applications(@application.id, pet.id).status != "Reject"%>
+        <%= form_tag("/admin/applications/#{@application.id}", method: 'patch') do %>
+          <input type="hidden" name="status" value='Approve'>
+          <input type="hidden" name="pet" value="<%= pet.id %>">
+          <%= submit_tag("Approve") %>
+        <% end %>
+        <%= form_tag("/admin/applications/#{@application.id}", method: 'patch') do %>
+          <input type="hidden" name="pet" value="<%= pet.id %>">
+          <input type="hidden" name="status" value='Reject'>
+          <%= submit_tag("Reject") %>
+        <% end %>
+    <% end %>
+  <% end %>
+</div>
+</body>

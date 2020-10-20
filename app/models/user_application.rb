@@ -13,4 +13,8 @@ class UserApplication < ApplicationRecord
     end
     pets.flatten
   end
+
+  def self.find_pet_applications(application_id, pet_id)
+    PetApplication.find_by(pet_id: pet_id, user_application_id: application_id)
+  end
 end
