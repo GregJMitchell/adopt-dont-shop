@@ -7,14 +7,24 @@ class UserApplication < ApplicationRecord
   def self.find_pets(name)
     pets = []
     Pet.all.each do |pet|
-      if pet.name.upcase.include?(name.upcase)
-        pets << Pet.where(name: "#{pet.name}").all
-      end
+      pets << Pet.where(name: pet.name.to_s).all if pet.name.upcase.include?(name.upcase)
     end
     pets.flatten
   end
 
   def self.find_pet_applications(application_id, pet_id)
     PetApplication.find_by(pet_id: pet_id, user_application_id: application_id)
+  end
+
+  def self.approved?(application_id)
+    pet_apps = PetApplication.where(user_application_id: application_id)
+
+    if pet_apps.any? { |pet_app| pet_app.status == 'Reject' }
+      false
+    elsif pet_apps.any? { |pet_app| pet_app.status.nil? }
+      'pending'
+    elsif pet_apps.all? { |pet_app| pet_app.status == 'Approve' }
+      true
+    end
   end
 end
