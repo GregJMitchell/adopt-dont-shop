@@ -59,6 +59,70 @@ describe 'As a visitor' do
           expect(page).to have_content('Approved')
         end
       end
+      it "rejecting a pet" do 
+        user_1 = User.create(name: 'Jose',
+          address: '123 ABC Street',
+          city: 'Denver',
+          state: 'Colorado',
+          zip: '12345')
+        shelter_1 = Shelter.create(name: 'Dumb Friends League',
+                        address: '123 ABC Street',
+                        city: 'Denver',
+                        state: 'Colorado',
+                        zip: '12345')
+        pet_1 = Pet.create(image: 'lib/assets/test_image',
+                name: 'Test_dog',
+                age: 5,
+                sex: 'male',
+                shelter_id: shelter_1.id)
+
+        application = UserApplication.create!(name: '', address: '', city: '', state: '', zip: '',
+                                  description: '', status: '', user_id: user_1.id)
+        PetApplication.create(pet_id: pet_1.id, user_application_id: application.id)
+
+        visit "/admin/applications/#{application.id}"
+
+        click_button 'Reject'
+
+        expect(page).not_to have_button('Approve')
+        expect(page).not_to have_button('Reject')
+        expect(page).to have_content('Rejected')
+      end
+      it "for pending applications" do
+        user_1 = User.create(name: 'Jose',
+          address: '123 ABC Street',
+          city: 'Denver',
+          state: 'Colorado',
+          zip: '12345')
+        shelter_1 = Shelter.create(name: 'Dumb Friends League',
+                        address: '123 ABC Street',
+                        city: 'Denver',
+                        state: 'Colorado',
+                        zip: '12345')
+        pet_1 = Pet.create(image: 'lib/assets/test_image',
+                name: 'Test_dog',
+                age: 5,
+                sex: 'male',
+                shelter_id: shelter_1.id)
+
+        pet_2 = Pet.create(image: 'lib/assets/test_image',
+                  name: 'Test_dog',
+                  age: 5,
+                  sex: 'male',
+                  shelter_id: shelter_1.id)
+
+        application = UserApplication.create!(name: '', address: '', city: '', state: '', zip: '',
+                                  description: '', status: 'In Progress', user_id: user_1.id)
+        PetApplication.create(pet_id: pet_1.id, user_application_id: application.id, status: nil)
+        PetApplication.create(pet_id: pet_2.id, user_application_id: application.id, status: nil)
+
+        visit "/admin/applications/#{application.id}"
+
+        find("#approve-button-#{pet_2.id}").click
+
+
+        expect(page).to have_content('In Progress')
+      end
     end
   end
 end

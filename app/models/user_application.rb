@@ -5,11 +5,7 @@ class UserApplication < ApplicationRecord
   has_many :pets, through: :pet_applications
 
   def self.find_pets(name)
-    pets = []
-    Pet.all.each do |pet|
-      pets << Pet.where(name: pet.name.to_s).all if pet.name.upcase.include?(name.upcase)
-    end
-    pets.flatten
+    Pet.where('lower(name) like ?', "%#{name.downcase}%")
   end
 
   def self.find_pet_applications(application_id, pet_id)

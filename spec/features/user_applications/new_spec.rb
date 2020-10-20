@@ -7,10 +7,7 @@ describe 'New Application' do
         visit '/applications/new'
 
         !find_field('application[name]').value
-        !find_field('application[address]').value
-        !find_field('application[city]').value
-        !find_field('application[state]').value
-        !find_field('application[zip]').value
+       
       end
       describe "When I click submit, Then I am taken to the new application's show page " do
         it "And I see my user listed along with all of my address information And I see an indicator that this application is 'In Progress'" do
@@ -23,10 +20,7 @@ describe 'New Application' do
           visit '/applications/new'
 
           fill_in 'application[name]', with: 'Mike'
-          fill_in 'application[address]', with: '123 ABC St.'
-          fill_in 'application[city]', with: 'Denver'
-          fill_in 'application[state]', with: 'CO'
-          fill_in 'application[zip]', with: '12345'
+         
 
           click_button 'Create Application'
 
@@ -41,10 +35,6 @@ describe 'New Application' do
           visit '/applications/new'
 
           fill_in 'application[name]', with: 'Mike'
-          fill_in 'application[address]', with: '123 ABC St.'
-          fill_in 'application[city]', with: 'Denver'
-          fill_in 'application[state]', with: 'CO'
-          fill_in 'application[zip]', with: '12345'
 
           click_button 'Create Application'
           expect(page).to have_content('Application not created: Username not found.')
