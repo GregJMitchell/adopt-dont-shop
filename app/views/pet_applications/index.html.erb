@@ -1,0 +1,30 @@
+<head>
+  <title>Pets</title>
+<style>
+h1 {
+  text-align: center;
+}
+h3 {
+  text-align: center;
+}
+h4 {
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+  <Article>
+    <h2>All Pet Applications</h2>
+  </Article>
+
+  <section>
+    <% if @pet_apps.empty? %>
+        <p>There are no applications for this pet yet</p>
+    <% else %>
+        <% @pet_apps.each do |pet_app| %>
+             <%= link_to "#{pet_app.user_application.name}", "/applications/#{pet_app.user_application.id}" %>
+        <%end%>
+    <% end %>
+  </section>
+</body>
