@@ -22,4 +22,7 @@
     <h3>Adoptable/Pending Status: <%=@pet[:status]%></h3>
     </div>
   </section>
+  <footer>
+    <%= link_to "All Applications", "/pets/#{@pet.id}/applications" %>
+  </footer>
 </body>
