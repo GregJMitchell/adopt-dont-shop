@@ -5,10 +5,13 @@
 <div>
 
   <% @application.pets.each do |pet| %>
-    <p><%= pet.name %>: 
-    <%= "Approved" if UserApplication.find_pet_applications(@application.id, pet.id).status == ('Approve') %>
-    <%= "Rejected" if UserApplication.find_pet_applications(@application.id, pet.id).status == ('Reject') %></p>
-    <% if UserApplication.find_pet_applications(@application.id, pet.id).status != 'Approve' && 
+    <p><%= pet.name %>:
+    <% if UserApplication.pet_application_approved?(pet) && @application.status != "Approved"%>
+      approved for adoption
+    <% else %>
+      <%= "Approved" if UserApplication.find_pet_applications(@application.id, pet.id).status == ('Approve') %>
+      <%= "Rejected" if UserApplication.find_pet_applications(@application.id, pet.id).status == ('Reject') %></p>
+      <% if UserApplication.find_pet_applications(@application.id, pet.id).status != 'Approve' &&
           UserApplication.find_pet_applications(@application.id, pet.id).status != "Reject"%>
         <%= form_tag("/admin/applications/#{@application.id}", method: 'patch') do %>
           <input type="hidden" name="status" value='Approve'>
@@ -20,6 +23,7 @@
           <input type="hidden" name="status" value='Reject'>
           <%= submit_tag("Reject") %>
         <% end %>
+      <% end %>
     <% end %>
   <% end %>
 </div>
