@@ -19,9 +19,9 @@ describe 'As a visitor' do
       expect(page).to have_link('Edit Shelter')
     end
 
-    it "should have a link to add a new review for this shelter" do
+    it 'should have a link to add a new review for this shelter' do
       shelter_1 = Shelter.create(name: 'Dumb Friends League',
-                                 address: '123 ABC Street',
+                                        address: '123 ABC Street',
                                  city: 'Denver',
                                  state: 'Colorado',
                                  zip: '12345')
