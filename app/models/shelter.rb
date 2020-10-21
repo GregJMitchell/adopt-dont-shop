@@ -12,6 +12,8 @@ class Shelter < ApplicationRecord
       user.name
     end
     UserApplication.where(name: user_names).count
+  end
+  
   def self.application_approved?(shelter)
     approved_bool = false
     shelter.pets.each do |pet|
