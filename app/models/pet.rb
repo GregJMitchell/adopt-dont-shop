@@ -1,6 +1,7 @@
 class Pet <ApplicationRecord
   belongs_to :shelter
 
+  has_many :pet_applications, dependent: :destroy
   has_many :user_applications, through: :pet_applications
 
   def self.count_pets(shelter_id)
