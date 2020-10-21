@@ -31,6 +31,13 @@
     <h3>Zipcode: <%=@shelter[:zip]%></h3>
   </section>
   <div>
+    <h3>Number of Pets: <%= Pet.count_pets(@shelter.id) %></h3>
+    <% if !(@shelter.reviews.empty?) %>
+        <h3>Average Rating: <%= @shelter.average_review_rating %></h3>
+        <h3>Number of Applications: <%= @shelter.count_applications %></h3>
+    <% end %>
+  </div>
+  <div>
     <h4>Reviews</h4>
     <a id="add_review" href="/shelters/<%= @shelter.id %>/reviews/new">Add Review</a>
     <% @shelter.reviews.each do |review| %>
