@@ -19,7 +19,7 @@ describe 'As a visitor' do
               visit '/shelters/new'
 
               fill_in 'shelter[name]', with: 'Test Shelter'
-              click_button 'Create User'
+              click_button 'Create Shelter'
               expect(current_path).to eq('/shelters')
               expect(page).to have_content('Test Shelter')
             end
