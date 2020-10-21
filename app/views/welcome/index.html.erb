@@ -5,10 +5,47 @@
   h1 {
     text-align: center;
   }
+  section{
+    padding: 25px;
+  }
+  .nav {
+    display: inline;
+  }
+    .container {
+      position: relative;
+      width: 100%;
+  }
+  .image {
+  width: 40%; 
+  height: auto;
+  padding: 20px;
+  }
+  .column {
+          float: left;
+          width: 33.33%;
+          padding: 20;
+        }
+
+        /* Clearfix (clear floats) */
+        .row::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
   </style>
 </head>
 
 <Body>
-
-
+  <section>
+    <a class="button" href="/users/new">Create User</a>
+  </section>
+  <div class="nav">
+      <div class="row">
+        <% Pet.all.each do |pet| %>
+          <div class="column">
+            <img src="<%= pet.image %>" class="image">
+          </div>
+        <% end %>
+        </div>
+  </div>
 </body>

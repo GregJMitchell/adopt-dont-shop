@@ -7,7 +7,10 @@
   }
   h5 {
     font-size: larger;
-    text-decoration: underline;
+    
+  }
+  .reviews{
+    text-align: center;
   }
   </style>
 </head>
@@ -39,21 +42,21 @@
         <h3>Number of Applications: <%= @shelter.count_applications %></h3>
     <% end %>
   </div>
-  <div>
+  <div class="reviews">
     <h4>Reviews</h4>
     <a id="add_review" href="/shelters/<%= @shelter.id %>/reviews/new">Add Review</a>
     <% @shelter.reviews.each do |review| %>
     <div class="div1">
-    <a id="edit_review" href="/reviews/<%= review.id %>/edit">Edit Review</a>
+    <a class="button" id="edit_review" href="/reviews/<%= review.id %>/edit">Edit Review</a>
     <form action="/reviews/<%= review.id %>" method="POST">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
       <input type="hidden" name="_method" value="DELETE">
       <input id="delete_button" class="button" type="submit" value="Delete Review"/>
     </form>
-      <h5><%= review.title %></h5>
-      <p><%= review.rating %></p>
-      <p><%= review.content %></p>
-      <p><%= review.username %></p>
+      <h5>Title: <%= review.title %></h5>
+      <p>Rating: <%= review.rating %></p>
+      <p>Description: <%= review.content %></p>
+      <p>Username: <%= review.username %></p>
       <img src="<%= review.image %>" alt="<%= review.username%>'s image'">
     </div>
     <% end %>
