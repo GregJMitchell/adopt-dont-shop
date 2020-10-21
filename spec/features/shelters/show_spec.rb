@@ -36,5 +36,44 @@ describe 'As a visitor' do
       !expect(find_field('review[username]').value)
       !expect(find_field('review[image]').value)
     end
+    it "I see statistics for that shelter, including: count of pets that are at that shelter, 
+    average shelter review rating, number of applications on file for that shelter" do
+      shelter_1 = Shelter.create(name: 'Dumb Friends League',
+        address: '123 ABC Street',
+        city: 'Denver',
+        state: 'Colorado',
+        zip: '12345')
+        user_1 = User.create(name: 'Jose',
+          address: '123 ABC Street',
+          city: 'Denver',
+          state: 'Colorado',
+          zip: '12345')
+          shelter_1 = Shelter.create(name: 'Dumb Friends League',
+            address: '123 ABC Street',
+            city: 'Denver',
+            state: 'Colorado',
+            zip: '12345')
+          pet_1 = Pet.create(image: 'lib/assets/test_image',
+              name: 'Test_dog',
+              age: 5,
+              sex: 'male',
+              shelter_id: shelter_1.id)
+
+              review = Review.create(title: 'test title',
+                rating: 5,
+                content: 'Content of the review',
+                image: '',
+                username: user_1.name,
+                user_id: user_1.id,
+                shelter_id: shelter_1.id)
+        application = UserApplication.create!(name: "Jose", address: "", city: "", state: "", zip:"",
+              description: "", status: "", user_id: user_1.id)
+
+              PetApplication.create(pet_id: pet_1.id, user_application_id: application.id)
+      visit "/shelters/#{shelter_1.id}"
+      expect(page).to have_content("Number of Pets: 1")
+      expect(page).to have_content("Average Rating: 5")
+      expect(page).to have_content("Number of Applications: 1")
+    end
   end
 end
