@@ -28,11 +28,13 @@ h4 {
         <h4>Sex: <%= pet.sex %></h4>
         <h4>Current Shelter Name: <a href="/shelters/<%= pet.shelter_id %>"><%= pet.shelter.name %></a></h4>
         <img src="<%= pet.image %>" alt="<%= pet.name%>_image">
-        <form action="/pets/<%= pet.id %>" method="POST">
-          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <input type="hidden" name="_method" value="DELETE">
-          <input id="delete_pet_button" class="button" type="submit" value="Delete Pet"/>
-        </form>
+        <% if !(Pet.pet_approved?(pet))%>
+          <form action="/pets/<%= pet.id %>" method="POST">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="_method" value="DELETE">
+            <input id="delete_pet_button" class="button" type="submit" value="Delete Pet"/>
+          </form>
+        <% end %>
     </div>
       <%end%>
   </section>

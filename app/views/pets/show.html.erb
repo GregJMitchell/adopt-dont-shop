@@ -10,11 +10,13 @@
     <img src="<%= @pet.image %>" alt="<%= @pet.name%>_image">
   </div>
   <button class="button"><a href="/pets/<%= @pet[:id]%>/edit">Edit Pet</a></button>
-    <form action="/pets/<%= @pet[:id] %>" method="POST">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input type="hidden" name="_method" value="DELETE">
-      <input id="delete_pet" class="button" type="submit" value="Delete Pet"/>
-    </form>
+  <% if !(Pet.pet_approved?(@pet))%>
+      <form action="/pets/<%= @pet[:id] %>" method="POST">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="DELETE">
+        <input id="delete_pet" class="button" type="submit" value="Delete Pet"/>
+      </form>
+    <% end %>
     <div class="pet_desc">
     <h3>Description: <%=@pet[:description]%></h3>
     <h3>Age: <%=@pet[:age]%></h3>

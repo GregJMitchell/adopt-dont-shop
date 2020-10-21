@@ -12,5 +12,12 @@ class Shelter < ApplicationRecord
       user.name
     end
     UserApplication.where(name: user_names).count
+  def self.application_approved?(shelter)
+    approved_bool = false
+    shelter.pets.each do |pet|
+      apps = PetApplication.where(pet_id: pet)
+      approved_bool = true if apps.any? { |app| app.status == 'Approve' }
+    end
+    approved_bool
   end
 end
